@@ -38,4 +38,20 @@ class MovieApi {
             }
         }
     }
+    
+    func getMovieCredit(with movieId: Int, onSuccess: @escaping(_ result: Credit) -> Void, onError: @escaping(_ errorMessage: String) -> Void ) {
+        let urlString: String = ROOT_LINK + MOVIE + String(movieId) + "/" + CREDIT + API_KEY
+        print(urlString)
+        AF.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+            guard let data = response.data else { return }
+            print(data)
+            do {
+                let result = try JSONDecoder().decode(Credit.self, from: data)
+                
+                onSuccess(result)
+            } catch let err {
+                onError(err as! String)
+            }
+        }
+    }
 }

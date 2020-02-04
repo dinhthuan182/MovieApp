@@ -10,11 +10,22 @@ import Foundation
 
 class Person: Decodable {
     let popularity: Float?
-    let known_for_department: String?
+    let knownForDepartment: String?
     let name: String?
-    let id: Int?
-    let profile_path: String?
+    let id: Int
+    let profilePath: String?
     let adult: Bool?
     //let known_for: []
     let gender: Int?
+    
+    private enum CodingKeys: String, CodingKey {
+        // Float type
+        case popularity
+        // String type
+        case knownForDepartment = "known_for_department", profilePath = "profile_path", name
+        // Int type
+        case id, gender
+        // Bool type
+        case adult
+    }
 }

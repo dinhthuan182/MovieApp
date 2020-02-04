@@ -10,7 +10,12 @@ import Foundation
 
 class PersonPopular: Decodable {
     var page: Int?
-    var total_results: Int?
-    var total_pages: Int?
+    var totalResults: Int?
+    var totalPages: Int?
     var results: [Person]?
+    
+    private enum CodingKeys: String, CodingKey {
+        case totalResults = "total_results", totalPages = "total_pages", page
+        case results
+    }
 }

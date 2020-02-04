@@ -10,14 +10,24 @@ import Foundation
 
 class MovieTopRate: Decodable {
     var page: Int?
-    var total_results: Int?
-    var total_pages: Int?
+    var totalResults: Int?
+    var totalPages: Int?
     var results: [Movie]?
+    
+    private enum CodingKeys: String, CodingKey {
+        case totalResults = "total_results", totalPages = "total_pages", page
+        case results
+    }
 }
 
 class ProgramTopRate: Decodable {
     var page: Int?
-    var total_results: Int?
-    var total_pages: Int?
+    var totalResults: Int?
+    var totalPages: Int?
     var results: [Program]?
+    
+    private enum CodingKeys: String, CodingKey {
+        case totalResults = "total_results", totalPages = "total_pages", page
+        case results
+    }
 }

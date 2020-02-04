@@ -45,6 +45,16 @@ class ProgramCollectionViewController: UICollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let program = topPrograms[indexPath.row]
+        
+        Api.program.getProgramDetail(with: program.id, onSuccess: { (program) in
+            self.showProgramDetail(program: program)
+        }, onError: { (error) in
+            print("Load movie detail error: ", error)
+        })
+    }
+    
     func getListMovie() {
         Api.program.getListProgram(onSuccess: { (topRate) in
             if let topList = topRate.results {
@@ -62,13 +72,20 @@ class ProgramCollectionViewController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
+    
+    func showProgramDetail(program: Program) {
+        let controller = ProgramDetailViewController()
+        controller.program = program
+        navigationController?.pushViewController(controller, animated: true)
+        
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ProgramCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.size.width - 3 * cellSpacing) / 2
-        let height = (UIScreen.main.bounds.size.height - 4 * cellSpacing) / 4
+        let height = (UIScreen.main.bounds.size.height - 3 * cellSpacing) / 3
         return CGSize(width: width, height: height)
     }
 }

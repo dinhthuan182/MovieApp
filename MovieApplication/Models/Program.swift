@@ -9,17 +9,28 @@
 import Foundation
 
 class Program: Decodable {
-    var original_name: String?
+    var originalName: String?
     var name: String?
     var popularity: Float?
-    var origin_country: [String]
-    var vote_count: Int?
-    var first_air_date: String?
-    var poster_path: String?
-    var id: Int?
-    var backdrop_path: String?
-    var original_language: String?
-    var genre_ids: [Int]?
-    var vote_average: Float?
+    var originCountry: [String]
+    var voteCount: Int?
+    var firstAirDate: String?
+    var posterPath: String?
+    var id: Int
+    var backdropPath: String?
+    var originalLanguage: String?
+    var genreIds: [Int]?
+    var voteAverage: Float?
     var overview: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        // String type
+        case originalName = "original_name", firstAirDate = "first_air_date", posterPath = "poster_path", backdropPath = "backdrop_path", originalLanguage = "original_language", name, overview
+        // Float type
+        case voteAverage = "vote_average", popularity
+        // Int type
+        case voteCount = "vote_count", id
+        // Array type
+        case originCountry = "origin_country", genreIds = "genre_ids"
+    }
 }

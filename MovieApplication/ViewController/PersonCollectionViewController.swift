@@ -64,7 +64,6 @@ class PersonCollectionViewController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
-
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

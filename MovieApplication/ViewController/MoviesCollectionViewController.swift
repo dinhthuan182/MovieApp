@@ -47,11 +47,8 @@ class MoviesCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = topMovies[indexPath.row]
-        guard let movieId = movie.id else {
-            return
-        }
         
-        Api.movie.getMovieDetail(with: movieId, onSuccess: { (movie) in
+        Api.movie.getMovieDetail(with: movie.id, onSuccess: { (movie) in
             self.showMovieDetail(movie: movie)
         }, onError: { (error) in
             print("Load movie detail error: ", error)
@@ -89,7 +86,7 @@ class MoviesCollectionViewController: UICollectionViewController {
 extension MoviesCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.size.width - 3 * cellSpacing) / 2
-        let height = (UIScreen.main.bounds.size.height - 4 * cellSpacing) / 4
+        let height = (UIScreen.main.bounds.size.height - 3 * cellSpacing) / 3
         return CGSize(width: width, height: height)
     }
 }

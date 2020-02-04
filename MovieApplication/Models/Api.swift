@@ -13,6 +13,7 @@ let API_KEY = "?api_key=d946957b5c4e68cd9115ebea6a06c502"
 let MOVIE = "movie/"
 let PROGRAM = "tv/"
 let PERSON = "person/"
+let CREDIT = "credits"
 let TOP_RATE = "top_rated"
 let POPULAR = "popular"
 

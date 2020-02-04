@@ -55,8 +55,8 @@ class PersonCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupBackDrop() {
-        if let backdrop = person?.profile_path {
-            let urlString = Api.general.getBackDropLink(backdrop)
+        if let backdrop = person?.profilePath {
+            let urlString = Api.general.getImageLink(backdrop)
             self.imgPerson.loadImageUsingCacheWithUrlString(urlString: urlString)
         }
     }

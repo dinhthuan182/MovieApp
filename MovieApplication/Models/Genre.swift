@@ -9,6 +9,6 @@
 import Foundation
 
 class Genre: Decodable {
-    let id: Int?
-    let name: String?
+    let id: Int
+    let name: String
 }

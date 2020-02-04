@@ -20,8 +20,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     let lblMovieName: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Iron man Iron man Iron man"
         lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.numberOfLines = 0
+        lbl.lineBreakMode = .byWordWrapping
         return lbl
     }()
     
@@ -31,12 +32,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         self.layer.borderWidth = 1
         self.layer.borderColor = CGColor(srgbRed: 41, green: 41, blue: 51, alpha: 1)
+        
         // Autolayout for imgMovie
         NSLayoutConstraint.activate([
             imgMovie.topAnchor.constraint(equalTo: contentView.topAnchor),
             imgMovie.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             imgMovie.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imgMovie.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.85)
+            imgMovie.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8)
         ])
         
         // Autolayout for lblMovieName
@@ -44,8 +46,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
             lblMovieName.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             lblMovieName.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             lblMovieName.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            lblMovieName.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.15)
-            
+            lblMovieName.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.2)
         ])
     }
     
@@ -57,8 +58,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupBackDrop() {
-        if let backdrop = movie?.backdrop_path {
-            let urlString = Api.general.getBackDropLink(backdrop)
+        if let backdrop = movie?.posterPath {
+            let urlString = Api.general.getImageLink(backdrop)
             self.imgMovie.loadImageUsingCacheWithUrlString(urlString: urlString)
         }
         

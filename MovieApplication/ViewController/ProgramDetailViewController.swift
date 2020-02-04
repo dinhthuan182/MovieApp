@@ -1,15 +1,14 @@
 //
-//  MovieDetailViewController.swift
+//  ProgramDetailViewController.swift
 //  MovieApplication
 //
-//  Created by Catalina on 2/3/20.
+//  Created by Catalina on 2/4/20.
 //  Copyright © 2020 Catalina. All rights reserved.
 //
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
-    
+class ProgramDetailViewController: UIViewController {
     private let actorCellId = "actorCellId"
     var casts = [Cast]()
     
@@ -99,40 +98,40 @@ class MovieDetailViewController: UIViewController {
         return clv
     }()
     
-    var movie: Movie? {
+    var program: Program? {
         didSet {
-            getListActor(at: movie!.id)
-            var genreString = ""
+            getListActor(at: program!.id)
+            //var genreString = ""
             var ratedString = ""
             // Setup image Backdrop
-            if let backdrop = movie?.backdropPath {
+            if let backdrop = program?.backdropPath {
                 let urlString = Api.general.getImageLink(backdrop)
                 self.imgBackdrop.loadImageUsingCacheWithUrlString(urlString: urlString)
             }
             
             // Setup image poster
-            if let poster = movie?.posterPath {
+            if let poster = program?.posterPath {
                 let urlString = Api.general.getImageLink(poster)
                 self.imgPoster.loadImageUsingCacheWithUrlString(urlString: urlString)
             }
             
-            self.lblTitle.text = movie?.title
+            self.lblTitle.text = program?.name
             
             // Setup genre list
-            if let genres = movie?.genres {
-                for (index, genre) in genres.enumerated() {
-                    if index == genres.endIndex - 1 {
-                        genreString += genre.name
-                        break
-                    }
-                    genreString += ( genre.name + ", " )
-                }
-            }
+//            if let genres = program?.genres {
+//                for (index, genre) in genres.enumerated() {
+//                    if index == genres.endIndex - 1 {
+//                        genreString += genre.name
+//                        break
+//                    }
+//                    genreString += ( genre.name + ", " )
+//                }
+//            }
             
-            self.lblGenres.text = genreString
+            //self.lblGenres.text = genreString
             
             // Setup reated
-            if let rated = movie?.voteAverage {
+            if let rated = program?.voteAverage {
                 for i in 1...5 {
                     if i < Int(rated / 2) {
                         ratedString += "★"
@@ -144,8 +143,8 @@ class MovieDetailViewController: UIViewController {
             self.lblRated.text = ratedString
             
             
-            self.tvOverView.text = movie?.overview
-            let height = estimateFrameForText(text: movie!.overview!).height
+            self.tvOverView.text = program?.overview
+            let height = estimateFrameForText(text: program!.overview!).height
             self.tvOverView.frame = CGRect(x: tvOverView.frame.origin.x, y: tvOverView.frame.origin.y, width: tvOverView.frame.width, height: height)
         }
     }
@@ -235,7 +234,7 @@ class MovieDetailViewController: UIViewController {
             separatorLine.heightAnchor.constraint(equalToConstant: 2)
         ])
         
-        let overviewHeight = estimateFrameForText(text: movie!.overview!).height + 35
+        let overviewHeight = estimateFrameForText(text: program!.overview!).height + 35
         NSLayoutConstraint.activate([
             tvOverView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor, constant: 5),
             tvOverView.leftAnchor.constraint(equalTo: vContent.leftAnchor),
@@ -289,7 +288,7 @@ class MovieDetailViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
-extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension ProgramDetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return casts.count
     }

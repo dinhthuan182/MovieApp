@@ -10,23 +10,37 @@ import Foundation
 
 class Movie: Decodable {
     var popularity: Float?
-    var vote_count: Int?
+    var voteCount: Int?
     var video: Bool?
-    var poster_path: String?
-    var id: Int?
+    var posterPath: String?
+    var id: Int
     var adult: Bool?
-    var backdrop_path: String?
-    var original_language: String?
-    var original_title: String?
-    var genre_ids: [Int]?
+    var backdropPath: String?
+    var originalLanguage: String?
+    var originalTitle: String?
+    var genreIds: [Int]?
     var title: String?
-    var vote_average: Float?
+    var voteAverage: Float?
     var overview: String?
-    var release_date: String?
-    //var belongs_to_collection:
+    var releaseDate: String?
     var budget: Int?
     var genres: [Genre]?
     var homepage: String?
-    var imdb_id: String?
+    var imdbId: String?
     var tagline: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        // Float type
+        case popularity, voteAverage = "vote_average"
+        // Int type
+        case voteCount = "vote_count", id, budget
+        // Bool type
+        case video, adult
+        // String type
+        case posterPath = "poster_path", backdropPath = "backdrop_path", originalLanguage = "original_language", originalTitle = "original_title", title, overview, homepage, imdbId = "imdb_id", tagline
+        // Another type
+        case genreIds = "genre_ids", genres
+        case releaseDate = "release_date"
+        
+    }
 }
