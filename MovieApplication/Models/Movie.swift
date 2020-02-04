@@ -9,18 +9,24 @@
 import Foundation
 
 class Movie: Decodable {
-    let popularity: Float?
-    let vote_count: Int?
-    let video: Bool?
-    let poster_path: String?
-    let id: Int?
-    let adult: Bool?
-    let backdrop_path: String?
-    let original_language: String?
-    let original_title: String?
-    let genre_ids: [Int]?
-    let title: String?
-    let vote_average: Float?
-    let overview: String?
-    let release_date: String?
+    var popularity: Float?
+    var vote_count: Int?
+    var video: Bool?
+    var poster_path: String?
+    var id: Int?
+    var adult: Bool?
+    var backdrop_path: String?
+    var original_language: String?
+    var original_title: String?
+    var genre_ids: [Int]?
+    var title: String?
+    var vote_average: Float?
+    var overview: String?
+    var release_date: String?
+    //var belongs_to_collection:
+    var budget: Int?
+    var genres: [Genre]?
+    var homepage: String?
+    var imdb_id: String?
+    var tagline: String?
 }
