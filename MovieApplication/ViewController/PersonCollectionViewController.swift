@@ -46,6 +46,16 @@ class PersonCollectionViewController: UICollectionViewController {
     
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let actor = popularPerson[indexPath.row]
+        
+        Api.person.getPersonDetail(with: actor.id, onSuccess: { (person) in
+            self.showPersonDetail(person: person)
+        }) { (error) in
+            print("Load person detail error: ", error)
+        }
+    }
 
     func getListPerson() {
         Api.person.getListPerson(onSuccess: { (popular) in
@@ -63,6 +73,12 @@ class PersonCollectionViewController: UICollectionViewController {
             //reload data of message collection
             self.collectionView.reloadData()
         }
+    }
+    
+    func showPersonDetail(person: Person) {
+        let controller = PersonDetailViewController()
+        controller.person = person
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

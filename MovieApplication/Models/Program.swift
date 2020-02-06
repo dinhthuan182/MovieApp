@@ -9,19 +9,20 @@
 import Foundation
 
 class Program: Decodable {
-    var originalName: String?
-    var name: String?
-    var popularity: Float?
-    var originCountry: [String]
-    var voteCount: Int?
-    var firstAirDate: String?
-    var posterPath: String?
-    var id: Int
-    var backdropPath: String?
-    var originalLanguage: String?
-    var genreIds: [Int]?
-    var voteAverage: Float?
-    var overview: String?
+    let originalName: String?
+    let name: String?
+    let popularity: Float?
+    let originCountry: [String]
+    let voteCount: Int?
+    let firstAirDate: String?
+    let posterPath: String?
+    let id: Int
+    let backdropPath: String?
+    let originalLanguage: String?
+    let genreIds: [Int]?
+    let voteAverage: Float?
+    let overview: String?
+    let createdBy: [Person]?
     
     private enum CodingKeys: String, CodingKey {
         // String type
@@ -31,6 +32,6 @@ class Program: Decodable {
         // Int type
         case voteCount = "vote_count", id
         // Array type
-        case originCountry = "origin_country", genreIds = "genre_ids"
+        case originCountry = "origin_country", genreIds = "genre_ids", createdBy = "created_by"
     }
 }

@@ -16,7 +16,6 @@ class MoviesCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Register cell classes
         self.collectionView!.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MoviesCellId)
         self.getListMovie()
@@ -27,6 +26,11 @@ class MoviesCollectionViewController: UICollectionViewController {
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: cellSpacing, bottom: 0, right: cellSpacing)
         collectionViewFlowLayout.minimumInteritemSpacing = 0
         collectionViewFlowLayout.minimumLineSpacing = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigation()
     }
 
     // MARK: UICollectionViewDataSource
@@ -62,7 +66,7 @@ class MoviesCollectionViewController: UICollectionViewController {
                 self.topMovies = top
             }
         }) { (error) in
-            print("Load movie error:",error)
+            print("Load movie error: ",error)
         }
         handleReloadCollection()
     }
@@ -79,6 +83,35 @@ class MoviesCollectionViewController: UICollectionViewController {
         controller.movie = movie
         navigationController?.pushViewController(controller, animated: true)
         
+    }
+    
+    func setupNavigation() {
+        navigationItem.title = "TV App"
+        navigationController?.navigationBar.barTintColor = .blue
+        navigationController?.navigationBar.isTranslucent = false
+        let lblTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 70, height: 100))
+        lblTitle.text = "TV App"
+        lblTitle.font = UIFont.boldSystemFont(ofSize: 25)
+        lblTitle.textColor = .white
+        navigationItem.titleView = lblTitle
+        
+        let btnSearch = UIButton(type: .system)
+        btnSearch.setImage(UIImage(named: "search_icon"), for: .normal)
+        btnSearch.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        btnSearch.tintColor = .white
+        
+        let btnFilter = UIButton(type: .system)
+        btnFilter.setImage(UIImage(named: "filter_icon"), for: .normal)
+        btnFilter.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        btnFilter.tintColor = .white
+        btnFilter.addTarget(self, action: #selector(showFilter), for: .touchUpInside)
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: btnSearch), UIBarButtonItem(customView: btnFilter)]
+        
+    }
+    
+    @objc func showFilter() {
+        let controller = FilterMovieViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
