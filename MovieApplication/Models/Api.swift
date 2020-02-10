@@ -23,3 +23,7 @@ class Api {
     static var person = PersonApi()
     static var general = Genaral()
 }
+
+struct AppString{
+
+}
