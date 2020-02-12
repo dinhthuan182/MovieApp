@@ -11,13 +11,13 @@ import UIKit
 
 let imageCache = NSCache<AnyObject, AnyObject>()
 extension UIImageView {
-    func loadImageUsingCacheWithUrlString(urlString: String) {
+    func loadImageUsingCacheWithUrlString(imgName: String) {
         //check cache for image
-        if let cacheImage = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
+        if let cacheImage = imageCache.object(forKey: imgName as AnyObject) as? UIImage {
             self.image = cacheImage
             return
         }
-        
+        let urlString = "https://image.tmdb.org/t/p/w500/"+imgName
         let requestUrl = URL(string: urlString)
         let request = URLRequest(url:requestUrl!)
         let task = URLSession.shared.dataTask(with: request) {
@@ -28,11 +28,10 @@ extension UIImageView {
            }
             DispatchQueue.main.async {
                 if let downloadedImage = UIImage(data: data!) {
-                    imageCache.setObject(downloadedImage, forKey: urlString as AnyObject)
+                    imageCache.setObject(downloadedImage, forKey: imgName as AnyObject)
                     self.image = downloadedImage
                 }
             }
-            
         }
         task.resume()
     }

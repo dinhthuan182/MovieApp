@@ -100,19 +100,19 @@ class ProgramDetailViewController: UIViewController {
     
     var program: Program? {
         didSet {
-            getListActor(at: program!.id)
+            //getListActor(at: program!.id)
             //var genreString = ""
             var ratedString = ""
             // Setup image Backdrop
             if let backdrop = program?.backdropPath {
                 let urlString = Api.general.getImageLink(backdrop)
-                self.imgBackdrop.loadImageUsingCacheWithUrlString(urlString: urlString)
+                self.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: urlString)
             }
             
             // Setup image poster
             if let poster = program?.posterPath {
                 let urlString = Api.general.getImageLink(poster)
-                self.imgPoster.loadImageUsingCacheWithUrlString(urlString: urlString)
+                self.imgPoster.loadImageUsingCacheWithUrlString(imgName: urlString)
             }
             
             self.lblTitle.text = program?.name
@@ -269,15 +269,6 @@ class ProgramDetailViewController: UIViewController {
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)], context: nil)
     }
     
-    func getListActor(at movieId: Int) {
-        Api.movie.getMovieCredit(with: movieId, onSuccess: { (credit) in
-            self.casts = credit.cast
-
-        }) { (err) in
-            print("Load credit error: ", err)
-        }
-        handleReloadCollection()
-    }
     
     func handleReloadCollection() {
         DispatchQueue.main.async {

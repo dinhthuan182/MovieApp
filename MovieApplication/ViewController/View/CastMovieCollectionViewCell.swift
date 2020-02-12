@@ -23,7 +23,7 @@ class CastMovieCollectionViewCell: UICollectionViewCell {
         didSet {
             if let profile = cast?.profilePath {
                 let urlString = Api.general.getImageLink(profile)
-                self.imgActor.loadImageUsingCacheWithUrlString(urlString: urlString)
+                self.imgActor.loadImageUsingCacheWithUrlString(imgName: urlString)
             }
         }
     }
