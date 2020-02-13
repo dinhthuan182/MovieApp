@@ -10,6 +10,7 @@ import UIKit
 
 class CastMovieDetailCell: UITableViewCell {
 
+    @IBOutlet weak var cltCasts: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

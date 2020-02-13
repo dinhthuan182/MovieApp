@@ -39,7 +39,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lv6-P5-9z3">
-                        <rect key="frame" x="10" y="215" width="134" height="34"/>
+                        <rect key="frame" x="10" y="215" width="134" height="35"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <state key="normal" title="Full Cast &amp; Crew">
                             <color key="titleColor" red="0.1951105893" green="0.07676588744" blue="0.078302644190000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,6 +49,7 @@
                 <constraints>
                     <constraint firstItem="lv6-P5-9z3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="5Jn-CM-mXO"/>
                     <constraint firstItem="j5Y-G4-WZD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Hqr-Bq-VkS"/>
+                    <constraint firstAttribute="bottom" secondItem="lv6-P5-9z3" secondAttribute="bottom" constant="15" id="N4e-bi-s4i"/>
                     <constraint firstItem="jO3-It-f2t" firstAttribute="top" secondItem="j5Y-G4-WZD" secondAttribute="bottom" constant="5" id="Phn-GK-IPj"/>
                     <constraint firstAttribute="trailing" secondItem="jO3-It-f2t" secondAttribute="trailing" constant="10" id="Pus-3b-oRM"/>
                     <constraint firstItem="j5Y-G4-WZD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="gJI-0X-3CY"/>
@@ -57,6 +58,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="cltCasts" destination="jO3-It-f2t" id="2fU-3c-nTe"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="202.56696428571428"/>
         </tableViewCell>
     </objects>

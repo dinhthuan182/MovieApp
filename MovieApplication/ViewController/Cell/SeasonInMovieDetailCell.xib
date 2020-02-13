@@ -22,8 +22,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hgk-Ay-v5E">
-                        <rect key="frame" x="16" y="66" width="288" height="154"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hgk-Ay-v5E">
+                        <rect key="frame" x="16" y="51" width="288" height="180"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXk-jd-lMk">
                                 <rect key="frame" x="10" y="10" width="69" height="33"/>
@@ -48,8 +48,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f6s-GG-yuw">
-                                <rect key="frame" x="10" y="84" width="268" height="62"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f6s-GG-yuw">
+                                <rect key="frame" x="10" y="71" width="268" height="104"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -73,8 +73,8 @@
                             <constraint firstAttribute="trailing" secondItem="f6s-GG-yuw" secondAttribute="trailing" constant="10" id="oOD-Yu-mFp"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDH-HD-WGt">
-                        <rect key="frame" x="10" y="228" width="109" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDH-HD-WGt">
+                        <rect key="frame" x="10" y="241" width="109" height="30"/>
                         <state key="normal" title="View All Season">
                             <color key="titleColor" red="0.26152527330000003" green="0.092948399479999999" blue="0.18683844799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
@@ -84,6 +84,7 @@
                     <constraint firstItem="Hgk-Ay-v5E" firstAttribute="top" secondItem="PQZ-jY-8TB" secondAttribute="bottom" constant="10" id="1G2-B9-vr0"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Hgk-Ay-v5E" secondAttribute="trailing" id="DOT-iR-SIR"/>
                     <constraint firstItem="MDH-HD-WGt" firstAttribute="top" secondItem="Hgk-Ay-v5E" secondAttribute="bottom" constant="10" id="Frh-bi-Zgn"/>
+                    <constraint firstAttribute="bottom" secondItem="MDH-HD-WGt" secondAttribute="bottom" constant="20" id="LsF-HE-ZE1"/>
                     <constraint firstItem="Hgk-Ay-v5E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Td0-k5-ndc"/>
                     <constraint firstItem="PQZ-jY-8TB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="YXK-VR-vzo"/>
                     <constraint firstItem="PQZ-jY-8TB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="ddg-Pe-kge"/>

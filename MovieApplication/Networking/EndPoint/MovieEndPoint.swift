@@ -19,6 +19,7 @@ public enum MovieApi {
     case popular(page: Int)
     case inTheater(page: Int)
     case featured(page: Int)
+    case infomation(id: Int)
     case video(id: Int)
 }
 
@@ -49,6 +50,8 @@ extension MovieApi: EndPointType {
             return "movie/now_playing"
         case .featured:
             return "trending/movie/day"
+        case .infomation(let id):
+            return "movie/\(id)"
         case .video(let id):
             return "movie/\(id)/videos"
         }

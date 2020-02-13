@@ -61,12 +61,14 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showMovieDetail()
+        let tv = televisions[indexPath.row]
+        showMovieDetail(for: tv.id)
     }
     
-    func showMovieDetail() {
+    func showMovieDetail(for id: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController")
+        let vc = storyboard.instantiateViewController(identifier: "MovieDetailViewController") as! MovieDetailViewController
+        vc.movieid = id
         vc.modalPresentationStyle = .fullScreen
         self.window?.rootViewController?.present(vc, animated: true, completion: nil)
     }

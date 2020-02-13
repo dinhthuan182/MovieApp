@@ -68,4 +68,13 @@ extension Movie: Decodable {
         rating = try movieContainer.decode(Double.self, forKey: .rating)
         overview = try movieContainer.decode(String.self, forKey: .overview)
     }
+    init() {
+        id = -1
+        posterPath = ""
+        backdrop = ""
+        title = ""
+        releaseDate = ""
+        rating = 0.0
+        overview = ""
+    }
 }

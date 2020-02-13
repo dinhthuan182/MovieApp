@@ -10,6 +10,8 @@ import UIKit
 
 class InfoMovieDetailCell: UITableViewCell {
 
+    @IBOutlet weak var tvOverview: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
