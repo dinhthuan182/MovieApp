@@ -39,11 +39,11 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if cellDatas[indexPath.row].cellId == 1 {
             let cell = Bundle.main.loadNibNamed("OnTVCell", owner: self, options: nil)?.first as! OnTVCell
-            networkManager.getAiringTodayTV(page: 1) { (televisions, error) in
+            networkManager.getAiringTodayTV(page: 1) { (responseData, error) in
                 if let error = error {
                     print(error)
                 }
-                if let tvs = televisions {
+                if let tvs = responseData?.televisions {
                     cell.televisions = Array(tvs.prefix(3))
                     cell.handleReloadData()
                 }

@@ -59,6 +59,17 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.lblSubTitle.text = tv.originalName
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showMovieDetail()
+    }
+    
+    func showMovieDetail() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController")
+        vc.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

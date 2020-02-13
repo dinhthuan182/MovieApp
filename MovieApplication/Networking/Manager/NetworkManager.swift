@@ -67,7 +67,7 @@ struct NetworkManager {
         }
     }
     
-    func getAiringTodayTV(page: Int, completion: @escaping (_ television: [Television]?, _ error: String?) -> ()) {
+    func getAiringTodayTV(page: Int, completion: @escaping (_ televisionData: TelevisionApiResponse?, _ error: String?) -> ()) {
         tvRouter.request(.airingToday(page: page)) { (data, response, error) in
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -84,7 +84,7 @@ struct NetworkManager {
                     
                     do {
                         let apiResponse = try JSONDecoder().decode(TelevisionApiResponse.self, from: responseData)
-                        completion(apiResponse.televisions, nil)
+                        completion(apiResponse, nil)
                     }catch {
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
                     }

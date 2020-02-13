@@ -30,13 +30,13 @@
                             <outlet property="delegate" destination="-1" id="9up-9b-3vZ"/>
                         </connections>
                     </collectionView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJz-ZG-I7F">
-                        <rect key="frame" x="10" y="0.0" width="61" height="50"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJz-ZG-I7F">
+                        <rect key="frame" x="10" y="0.0" width="69" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="SYs-XG-yxo"/>
+                            <constraint firstAttribute="height" constant="50" id="SYs-XG-yxo"/>
                             <constraint firstAttribute="height" constant="50" id="bgM-cp-w3r"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <state key="normal" title="On TV">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
