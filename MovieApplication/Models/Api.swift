@@ -18,7 +18,6 @@ let TOP_RATE = "top_rated"
 let POPULAR = "popular"
 
 class Api {
-    static var movie = MovieApi()
     static var program = ProgramApi()
     static var person = PersonApi()
     static var general = Genaral()
