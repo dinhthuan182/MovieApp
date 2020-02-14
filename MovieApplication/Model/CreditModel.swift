@@ -34,7 +34,7 @@ struct Cast {
     let character: String
     let creditId: String
     let gender: Int
-    let castId: Int
+    let castId: Int?
     let name: String
     let order: Int
     let profilePath: String?
@@ -60,7 +60,7 @@ extension Cast: Decodable {
         character = try castContainer.decode(String.self, forKey: .character)
         creditId = try castContainer.decode(String.self, forKey: .creditId)
         gender = try castContainer.decode(Int.self, forKey: .gender)
-        castId = try castContainer.decode(Int.self, forKey: .castId)
+        castId = try castContainer.decodeIfPresent(Int.self, forKey: .castId)
         name = try castContainer.decode(String.self, forKey: .name)
         order = try castContainer.decode(Int.self, forKey: .order)
         profilePath = try castContainer.decodeIfPresent(String.self, forKey: .profilePath)

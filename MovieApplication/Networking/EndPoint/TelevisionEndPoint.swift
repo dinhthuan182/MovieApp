@@ -15,6 +15,7 @@ public enum TelevisionApi {
     case onTheAir(page: Int)
     case infomation(id: Int)
     case topRated(page: Int)
+    case credits(id: Int)
 }
 
 extension TelevisionApi: EndPointType {
@@ -48,6 +49,8 @@ extension TelevisionApi: EndPointType {
             return "\(id)"
         case .topRated:
             return "top_rated"
+        case .credits(let id):
+            return "\(id)/credits"
         }
     }
     
@@ -65,7 +68,7 @@ extension TelevisionApi: EndPointType {
             return .requestParameters(bodyParameters: nil,
                                   urlParameters: ["page":page,
                                                   "api_key":NetworkManager.MovieAPIKey])
-        case .infomation:
+        case .infomation, .credits:
             return .requestParameters(bodyParameters: nil, urlParameters: ["api_key":NetworkManager.MovieAPIKey])
             
         default:

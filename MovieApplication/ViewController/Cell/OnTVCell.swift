@@ -76,6 +76,7 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
         let nvc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController") as! UINavigationController
         let vc = nvc.topViewController as! MovieDetailViewController
         vc.movieid = id
+        vc.isMovie = false
         nvc.modalPresentationStyle = .fullScreen
         self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
     }

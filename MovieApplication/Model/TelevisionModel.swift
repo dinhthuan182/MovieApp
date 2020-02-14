@@ -40,7 +40,7 @@ struct Television {
     let backdrop: String?
     let firstAirDate: String
     let originalName: String
-    let genreIds: [Int]
+    let genreIds: [Int]?
     let popularity: Float
     let voteCount: Int
     let overview: String
@@ -68,7 +68,7 @@ extension Television: Decodable {
         backdrop = try televisionContainer.decodeIfPresent(String.self, forKey: .backdrop)
         firstAirDate = try televisionContainer.decode(String.self, forKey: .firstAirDate)
         originalName = try televisionContainer.decode(String.self, forKey: .originalName)
-        genreIds = try televisionContainer.decode([Int].self, forKey: .genreIds)
+        genreIds = try televisionContainer.decodeIfPresent([Int].self, forKey: .genreIds)
         popularity = try televisionContainer.decode(Float.self, forKey: .popularity)
         voteCount = try televisionContainer.decode(Int.self, forKey: .voteCount)
         overview = try televisionContainer.decode(String.self, forKey: .overview)

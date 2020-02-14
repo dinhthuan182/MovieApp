@@ -109,6 +109,7 @@ class MovieListViewController: UITableViewController {
         let nvc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController") as! UINavigationController
         let vc = nvc.topViewController as! MovieDetailViewController
         vc.movieid = id
+        vc.isMovie = isMovie
         nvc.modalPresentationStyle = .fullScreen
         self.present(nvc, animated: true)
     }

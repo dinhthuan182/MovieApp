@@ -8,17 +8,18 @@
 
 import UIKit
 
-class InfoMovieDetailCell: UITableViewCell {
+class InfoMovieDetailCell: UITableViewCell, UITextViewDelegate {
 
-    @IBOutlet weak var tvOverview: UITextView! {
-        didSet {
-            tvOverViewHC.constant = tvOverview.contentSize.height - 30
-        }
-    }
+    @IBOutlet weak var tvOverview: UITextView!
     @IBOutlet weak var tvOverViewHC: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func setupView() {
+        tvOverview.delegate = self
+        textViewDidChange(tvOverview)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,4 +28,9 @@ class InfoMovieDetailCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        let sizeToFitIn = CGSize(width: textView.bounds.size.width, height: CGFloat(MAXFLOAT))
+        let newSize = textView.sizeThatFits(sizeToFitIn)
+        self.tvOverViewHC.constant = newSize.height
+    }
 }
