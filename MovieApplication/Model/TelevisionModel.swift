@@ -36,8 +36,8 @@ extension TelevisionApiResponse: Decodable {
 struct Television {
     let id: Int
     let name: String
-    let posterPath: String
-    let backdrop: String
+    let posterPath: String?
+    let backdrop: String?
     let firstAirDate: String
     let originalName: String
     let genreIds: [Int]
@@ -64,13 +64,26 @@ extension Television: Decodable {
         let televisionContainer = try decoder.container(keyedBy: TelevisionCodingKeys.self)
         id = try televisionContainer.decode(Int.self, forKey: .id)
         name = try televisionContainer.decode(String.self, forKey: .name)
-        posterPath = try televisionContainer.decode(String.self, forKey: .posterPath)
-        backdrop = try televisionContainer.decode(String.self, forKey: .backdrop)
+        posterPath = try televisionContainer.decodeIfPresent(String.self, forKey: .posterPath)
+        backdrop = try televisionContainer.decodeIfPresent(String.self, forKey: .backdrop)
         firstAirDate = try televisionContainer.decode(String.self, forKey: .firstAirDate)
         originalName = try televisionContainer.decode(String.self, forKey: .originalName)
         genreIds = try televisionContainer.decode([Int].self, forKey: .genreIds)
         popularity = try televisionContainer.decode(Float.self, forKey: .popularity)
         voteCount = try televisionContainer.decode(Int.self, forKey: .voteCount)
         overview = try televisionContainer.decode(String.self, forKey: .overview)
+    }
+    
+    init() {
+        id = -1
+        name = ""
+        posterPath = ""
+        backdrop = ""
+        firstAirDate = ""
+        originalName = ""
+        genreIds = [0]
+        popularity = 0.0
+        voteCount = 0
+        overview = ""
     }
 }

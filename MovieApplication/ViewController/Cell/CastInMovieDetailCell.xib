@@ -9,32 +9,39 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CastInMovieDetailCell" customModule="MovieApplication" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="castCell" id="gTV-IL-0wX" customClass="CastInMovieDetailCell" customModule="MovieApplication" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="329" height="405"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="329" height="405"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ironman_backrop" translatesAutoresizingMaskIntoConstraints="NO" id="IkH-VB-E7S">
-                        <rect key="frame" x="0.0" y="0.0" width="329" height="330"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_man" translatesAutoresizingMaskIntoConstraints="NO" id="IkH-VB-E7S">
+                        <rect key="frame" x="0.0" y="0.0" width="329" height="305"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoO-pf-N79">
-                        <rect key="frame" x="5" y="335" width="319" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoO-pf-N79">
+                        <rect key="frame" x="5" y="310" width="319" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="RmM-IZ-PMD"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gnj-dT-YIT">
-                        <rect key="frame" x="5" y="360.5" width="319" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gnj-dT-YIT">
+                        <rect key="frame" x="5" y="350" width="319" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Lw2-9I-Ptb"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10 Episodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqE-tl-hLr">
-                        <rect key="frame" x="5" y="386.5" width="319" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 Episodes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqE-tl-hLr">
+                        <rect key="frame" x="5" y="380" width="319" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="cZu-1m-40j"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -56,10 +63,16 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="329" height="405"/>
+            <connections>
+                <outlet property="imgProfile" destination="IkH-VB-E7S" id="5il-pq-UJU"/>
+                <outlet property="lblEpisodes" destination="IqE-tl-hLr" id="Ev6-6i-Zkp"/>
+                <outlet property="lblName" destination="uoO-pf-N79" id="5jZ-0D-mXu"/>
+                <outlet property="lblSubTitle" destination="Gnj-dT-YIT" id="76h-w5-fle"/>
+            </connections>
             <point key="canvasLocation" x="334.05797101449281" y="246.76339285714283"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="ironman_backrop" width="660" height="330"/>
+        <image name="person_man" width="30" height="30"/>
     </resources>
 </document>

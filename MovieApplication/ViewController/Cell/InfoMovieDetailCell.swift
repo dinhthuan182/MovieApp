@@ -10,8 +10,12 @@ import UIKit
 
 class InfoMovieDetailCell: UITableViewCell {
 
-    @IBOutlet weak var tvOverview: UITextView!
-    
+    @IBOutlet weak var tvOverview: UITextView! {
+        didSet {
+            tvOverViewHC.constant = tvOverview.contentSize.height - 30
+        }
+    }
+    @IBOutlet weak var tvOverViewHC: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

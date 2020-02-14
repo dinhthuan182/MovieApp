@@ -15,21 +15,13 @@ class MovieDetailViewController: UITableViewController {
     let cellArea = [cellData(cellId: 1, title: "Header"),
                     cellData(cellId: 2, title: "Overview"),
                     cellData(cellId: 3, title: "Cast"),
-                    cellData(cellId: 4, title: "Season"),
-                    cellData(cellId: 5, title: "Social")]
+                    cellData(cellId: 4, title: "Social")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Load information for movie
-        networkManager.getMovieInfomation(id: movieid) { (movie, error) in
-            if let err = error {
-                print(err)
-            }
-            
-            if let movie = movie {
-                self.movie = movie
-            }
-        }
+        getMovieInfo()
+        
         setupNavigationBar()
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -45,27 +37,45 @@ class MovieDetailViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if cellArea[indexPath.row].cellId == 1 {
             let cell = Bundle.main.loadNibNamed("HeaderMovieDetailCell", owner: self, options: nil)?.first as! HeaderMovieDetailCell
-            cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: movie.backdrop)
-            cell.imgPoster.loadImageUsingCacheWithUrlString(imgName: movie.posterPath)
+            if let backdrop = movie.backdrop {
+                cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
+            }
+            
+            if let poster = movie.posterPath {
+                cell.imgPoster.loadImageUsingCacheWithUrlString(imgName: poster)
+            }
+            
             cell.lblTitle.text = movie.title
             return cell
+            
         }else if cellArea[indexPath.row].cellId == 2 {
             let cell = Bundle.main.loadNibNamed("InfoMovieDetailCell", owner: self, options: nil)?.first as! InfoMovieDetailCell
+            cell.tvOverview.text = movie.overview
             return cell
+            
         }else if cellArea[indexPath.row].cellId == 3 {
             let cell = Bundle.main.loadNibNamed("CastMovieDetailCell", owner: self, options: nil)?.first as! CastMovieDetailCell
+            networkManager.getMovieCredits(id: movieid) { (data, error) in
+                if let error = error {
+                    print(error)
+                }
+                
+                if let credit = data {
+                    cell.cast = credit.cast
+                    cell.handleReloadData()
+                }
+            }
+            cell.collectionViewSetup()
             return cell
-        }else if cellArea[indexPath.row].cellId == 4 {
-            let cell = Bundle.main.loadNibNamed("SeasonInMovieDetailCell", owner: self, options: nil)?.first as! SeasonInMovieDetailCell
-            return cell
+            
         }else {
             let cell = Bundle.main.loadNibNamed("SocialMovieDetailCell", owner: self, options: nil)?.first as! SocialMovieDetailCell
             return cell
+            
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //return tableView.frame.height * 0.52
         return UITableView.automaticDimension
     }
     
@@ -83,6 +93,19 @@ class MovieDetailViewController: UITableViewController {
     func handleReloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+    }
+    
+    func getMovieInfo() {
+        networkManager.getMovieInfomation(id: movieid) { (movie, error) in
+            if let err = error {
+                print(err)
+            }
+            
+            if let movie = movie {
+                self.movie = movie
+                self.handleReloadData()
+            }
         }
     }
 }

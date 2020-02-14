@@ -10,6 +10,11 @@ import UIKit
 
 class CastInMovieDetailCell: UICollectionViewCell {
 
+    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblSubTitle: UILabel!
+    @IBOutlet weak var lblEpisodes: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -12,7 +12,10 @@ class MovieListViewController: UITableViewController {
     let networkManager = NetworkManager()
     let movieListCellId = "MovieListCell"
     var televisonList = [Television]()
+    var movieList = [Movie]()
+    var isMovie = true
     var currentPage = 1
+    var totalPage = 1
     fileprivate var activityIndicator: LoadMoreActivityIndicator!
     
     @IBOutlet var tblMovie: UITableView!
@@ -24,18 +27,7 @@ class MovieListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Get movie
-        networkManager.getAiringTodayTV(page: currentPage) { (responseData, error) in
-            if let error = error {
-                print(error)
-            }
-            
-            if let responseData = responseData {
-                self.televisonList = responseData.televisions
-                self.handleReloadData()
-            }
-        }
+        getData(page: currentPage)
         activityIndicator = LoadMoreActivityIndicator(scrollView: tblMovie, spacingFromLastCell: 10, spacingFromLastCellWhenLoadMoreActionStart: 60)
     }
 
@@ -43,37 +35,53 @@ class MovieListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print(televisonList.count)
-        return televisonList.count
+        if isMovie {
+            return movieList.count
+        }else {
+            return televisonList.count
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieListCellId, for: indexPath) as! MovieListCell
-        let tv = televisonList[indexPath.row]
-        cell.imgBackDrop.loadImageUsingCacheWithUrlString(imgName: tv.backdrop)
-        cell.lblTitle.text = tv.name
-        cell.lblDate.text = "First air date: " + tv.firstAirDate
+        if isMovie {
+            let movie = movieList[indexPath.row]
+            if let backdrop = movie.backdrop {
+                cell.imgBackDrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
+            }
+            cell.lblTitle.text = movie.title
+            cell.lblDate.text = "First air date: " + movie.releaseDate
+        }else {
+            let tv = televisonList[indexPath.row]
+            if let backdrop = tv.backdrop {
+               cell.imgBackDrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
+            }
+            
+            cell.lblTitle.text = tv.name
+            cell.lblDate.text = "First air date: " + tv.firstAirDate
+        }
+        
         return cell
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        activityIndicator.start {
-            self.networkManager.getAiringTodayTV(page: self.currentPage + 1) { (responseData, error) in
-                if let error = error {
-                    print(error)
-                }
-                
-                if let data = responseData {
-                    self.televisonList.append(contentsOf: data.televisions)
-                    self.currentPage += 1
-                    self.handleReloadData()
-                }
+        if totalPage > currentPage {
+            activityIndicator.start {
+                self.getData(page: self.currentPage + 1)
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showMovieDetail()
+        if isMovie {
+            let movie = movieList[indexPath.row]
+            showMovieDetail(id: movie.id)
+        }else {
+            let tv = televisonList[indexPath.row]
+            showMovieDetail(id: tv.id)
+        }
+        
     }
     
     func handleReloadData() {
@@ -96,10 +104,45 @@ class MovieListViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func showMovieDetail() {
+    func showMovieDetail(id: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController")
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+        let nvc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController") as! UINavigationController
+        let vc = nvc.topViewController as! MovieDetailViewController
+        vc.movieid = id
+        nvc.modalPresentationStyle = .fullScreen
+        self.present(nvc, animated: true)
+    }
+    
+    func getData(page: Int) {
+        if isMovie {
+            // Get movie
+            networkManager.getMoviesInTheater(page: page) { (responseData, error) in
+                if let error = error {
+                    print(error)
+                }
+                
+                if let responseData = responseData {
+                    self.movieList.append(contentsOf: responseData.movies)
+                    self.currentPage = responseData.page
+                    self.totalPage = responseData.numberOfPages
+                    self.handleReloadData()
+                }
+            }
+        }else {
+            // Get movie
+            networkManager.getAiringTodayTV(page: page) { (responseData, error) in
+                if let error = error {
+                    print(error)
+                }
+                
+                if let responseData = responseData {
+                    self.televisonList.append(contentsOf: responseData.televisions)
+                    self.currentPage = responseData.page
+                    self.totalPage = responseData.numberOfPages
+                    self.handleReloadData()
+                }
+            }
+        }
+        
     }
 }

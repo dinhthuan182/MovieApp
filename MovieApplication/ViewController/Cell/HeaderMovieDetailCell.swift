@@ -10,10 +10,9 @@ import UIKit
 
 class HeaderMovieDetailCell: UITableViewCell {
 
-    @IBOutlet weak var imgBackdrop: UIImageView!
+    @IBOutlet weak var imgBackdrop: UIImageView! 
     @IBOutlet weak var imgPoster: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

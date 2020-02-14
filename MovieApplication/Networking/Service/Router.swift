@@ -43,6 +43,7 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                 self.addAdditionalHeaders(additionHeaders, request: &request)
                 try self.configureParameters(bodyParameters: bodyParameters, urlParameters: urlParameters, request: &request)
             }
+            print(request)
             return request
         } catch {
             throw error

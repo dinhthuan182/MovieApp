@@ -39,7 +39,7 @@ struct NetworkManager {
         }
     }
     
-    func getMoviesInTheater(page: Int, completion: @escaping (_ movie: [Movie]?, _ error: String?) -> ()) {
+    func getMoviesInTheater(page: Int, completion: @escaping (_ movieApiResponse: MovieApiResponse?, _ error: String?) -> ()) {
         movieRouter.request(.inTheater(page: page)) { (data, response, error) in
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -56,13 +56,69 @@ struct NetworkManager {
                     
                     do {
                         let apiResponse = try JSONDecoder().decode(MovieApiResponse.self, from: responseData)
-                        completion(apiResponse.movies, nil)
+                        completion(apiResponse, nil)
                     }catch {
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
                     }
                 case .failure(let networkFailureError):
                     completion(nil, networkFailureError)
                 }
+            }
+        }
+    }
+    
+    func getMovieInfomation(id: Int, completion: @escaping (_ movie: Movie?, _ error: String?) -> ()) {
+        movieRouter.request(.infomation(id: id)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+               let result = self.handleNetworkResponse(response)
+               switch result {
+               case .success:
+                   guard let responseData = data else {
+                       completion(nil, NetworkResponse.noData.rawValue)
+                       return
+                   }
+                   
+                   do {
+                       let apiResponse = try JSONDecoder().decode(Movie.self, from: responseData)
+                       completion(apiResponse, nil)
+                   }catch {
+                       completion(nil, NetworkResponse.unableToDecode.rawValue)
+                   }
+               case .failure(let networkFailureError):
+                   completion(nil, networkFailureError)
+               }
+            }
+        }
+    }
+    
+    func getMovieCredits(id: Int, completion: @escaping (_ credit: CreditApiResponse?, _ error: String?) -> ()) {
+        movieRouter.request(.credits(id: id)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+               let result = self.handleNetworkResponse(response)
+               switch result {
+               case .success:
+                   guard let responseData = data else {
+                       completion(nil, NetworkResponse.noData.rawValue)
+                       return
+                   }
+                   
+                   do {
+                       let apiResponse = try JSONDecoder().decode(CreditApiResponse.self, from: responseData)
+                    completion(apiResponse, nil)
+                   }catch {
+                       completion(nil, NetworkResponse.unableToDecode.rawValue)
+                   }
+               case .failure(let networkFailureError):
+                   completion(nil, networkFailureError)
+               }
             }
         }
     }
@@ -95,7 +151,7 @@ struct NetworkManager {
         }
     }
     
-    func getFeatureds(page: Int, completion: @escaping (_ movies: [Movie]?, _ error: String?) -> ()) {
+    func getFeatureds(page: Int, completion: @escaping (_ movieApiResponse: MovieApiResponse?, _ error: String?) -> ()) {
         movieRouter.request(.featured(page: page)) { (data, response, error) in
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -112,7 +168,7 @@ struct NetworkManager {
                     
                     do {
                         let apiResponse = try JSONDecoder().decode(MovieApiResponse.self, from: responseData)
-                        completion(apiResponse.movies, nil)
+                        completion(apiResponse, nil)
                     }catch {
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
                     }
@@ -123,8 +179,8 @@ struct NetworkManager {
         }
     }
     
-    func getMovieInfomation(id: Int, completion: @escaping (_ movie: Movie?, _ error: String?) -> ()) {
-        movieRouter.request(.infomation(id: id)) { (data, response, error) in
+    func getTelevisonInfomation(id: Int, completion: @escaping (_ tv: Television?, _ error: String?) -> ()) {
+        tvRouter.request(.infomation(id: id)) { (data, response, error) in
             if error != nil {
                 completion(nil, "Please check your network connection.")
             }
@@ -139,7 +195,7 @@ struct NetworkManager {
                    }
                    
                    do {
-                       let apiResponse = try JSONDecoder().decode(Movie.self, from: responseData)
+                       let apiResponse = try JSONDecoder().decode(Television.self, from: responseData)
                        completion(apiResponse, nil)
                    }catch {
                        completion(nil, NetworkResponse.unableToDecode.rawValue)

@@ -9,7 +9,9 @@
 import UIKit
 
 class CastMovieDetailCell: UITableViewCell {
-
+    private let castCell = "castCell"
+    var cast = [Cast]()
+    
     @IBOutlet weak var cltCasts: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,4 +24,48 @@ class CastMovieDetailCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func collectionViewSetup() {
+        let nib = UINib(nibName: "CastInMovieDetailCell", bundle: nil)
+        self.cltCasts.register(nib, forCellWithReuseIdentifier: castCell)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 5
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.scrollDirection = .horizontal
+        cltCasts.collectionViewLayout = flowLayout
+        cltCasts.dataSource = self
+        cltCasts.delegate = self
+    }
+    
+    func handleReloadData() {
+        DispatchQueue.main.async {
+            self.cltCasts.reloadData()
+        }
+    }
+}
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+extension CastMovieDetailCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return cast.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: castCell, for: indexPath) as! CastInMovieDetailCell
+        let c = cast[indexPath.row]
+        if let profile =  c.profilePath {
+            cell.imgProfile.loadImageUsingCacheWithUrlString(imgName:profile)
+        }
+        
+        cell.lblName.text = c.name
+        cell.lblSubTitle.text = c.character
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension CastMovieDetailCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width / 3.5, height: collectionView.frame.height)
+    }
 }

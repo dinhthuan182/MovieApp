@@ -52,11 +52,11 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         } else if cellDatas[indexPath.row].cellId == 2 {
             let cell = Bundle.main.loadNibNamed("InTheaterCell", owner: self, options: nil)?.first as! InTheaterCell
-            networkManager.getMoviesInTheater(page: 1) { (movies, error) in
+            networkManager.getMoviesInTheater(page: 1) { (responseData, error) in
                 if let error = error {
                     print(error)
                 }
-                if let data = movies {
+                if let data = responseData?.movies {
                     cell.movies = Array(data.prefix(3))
                     cell.handleReloadData()
                 }
@@ -65,11 +65,11 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         } else {
             let cell = Bundle.main.loadNibNamed("FeaturedCell", owner: self, options: nil)?.first as! FeaturedCell
-            networkManager.getFeatureds(page: 1) { (movies, error) in
+            networkManager.getFeatureds(page: 1) { (movieApiResponse, error) in
                 if let error = error {
                     print(error)
                 }
-                if let data = movies {
+                if let data = movieApiResponse?.movies {
                     cell.movies = Array(data.prefix(3))
                     cell.handleReloadData()
                 }

@@ -48,7 +48,9 @@ extension FeaturedCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featureCell, for: indexPath) as! FeatureMovieCell
         let movie = movies[indexPath.row]
-        cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: movie.backdrop)
+        if let backdrop = movie.backdrop {
+            cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
+        }
         cell.lblTitle.text = movie.title
         cell.tvDesc.text = movie.overview
         return cell

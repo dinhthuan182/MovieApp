@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ironman_backrop" translatesAutoresizingMaskIntoConstraints="NO" id="efT-lp-GAb">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="film_img" translatesAutoresizingMaskIntoConstraints="NO" id="efT-lp-GAb">
                         <rect key="frame" x="10" y="0.0" width="110" height="184"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="110" id="ELb-d8-N3I"/>
@@ -63,6 +63,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="ironman_backrop" width="660" height="330"/>
+        <image name="film_img" width="1600" height="1600"/>
     </resources>
 </document>

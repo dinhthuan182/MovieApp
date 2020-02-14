@@ -16,15 +16,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="357"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Theaters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzc-tQ-9E5">
-                        <rect key="frame" x="10" y="0.0" width="310" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="Qoc-o0-duI"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lKh-SE-l5z">
                         <rect key="frame" x="0.0" y="50" width="320" height="307"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -35,21 +26,32 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBq-yi-ZC3">
+                        <rect key="frame" x="10" y="0.0" width="121" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Bgf-sd-D5i"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <state key="normal" title="In Theaters">
+                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </state>
+                        <connections>
+                            <action selector="showMoreMovie:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tLg-aS-Tsg"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lKh-SE-l5z" firstAttribute="top" secondItem="Pzc-tQ-9E5" secondAttribute="bottom" id="4gE-EK-26r"/>
-                    <constraint firstAttribute="trailing" secondItem="Pzc-tQ-9E5" secondAttribute="trailing" id="6Bi-Qq-5Vj"/>
-                    <constraint firstItem="Pzc-tQ-9E5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Bjb-Gq-RSO"/>
-                    <constraint firstItem="Pzc-tQ-9E5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Pg0-z9-egP"/>
-                    <constraint firstItem="lKh-SE-l5z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="YXe-iR-0jb"/>
-                    <constraint firstAttribute="trailing" secondItem="lKh-SE-l5z" secondAttribute="trailing" id="toy-38-chO"/>
-                    <constraint firstAttribute="bottom" secondItem="lKh-SE-l5z" secondAttribute="bottom" id="ufW-PZ-ykT"/>
+                    <constraint firstItem="yBq-yi-ZC3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="HPO-9E-Alo"/>
+                    <constraint firstItem="lKh-SE-l5z" firstAttribute="top" secondItem="yBq-yi-ZC3" secondAttribute="bottom" id="Jmh-PR-Sil"/>
+                    <constraint firstAttribute="bottom" secondItem="lKh-SE-l5z" secondAttribute="bottom" id="a9A-bi-Zhz"/>
+                    <constraint firstAttribute="trailing" secondItem="lKh-SE-l5z" secondAttribute="trailing" id="cT7-Na-AzJ"/>
+                    <constraint firstItem="yBq-yi-ZC3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pIM-8g-3PD"/>
+                    <constraint firstItem="lKh-SE-l5z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uSn-4n-zAz"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cltInTheaterMovie" destination="lKh-SE-l5z" id="G4s-vm-CHF"/>
-                <outlet property="lblTitle" destination="Pzc-tQ-9E5" id="maQ-HX-LQQ"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="258.14732142857144"/>
         </tableViewCell>

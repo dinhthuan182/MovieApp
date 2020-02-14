@@ -19,6 +19,20 @@ class InTheaterCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        showMovieDetail(for: movie.id)
+    }
+    
+    @IBAction func showMoreMovie(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nvc = storyboard.instantiateViewController(identifier: "MovieListNavigationViewController") as! UINavigationController
+        let vc = nvc.topViewController as! MovieListViewController
+        vc.isMovie = true
+        nvc.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
+    }
+    
     func collectionViewSetup() {
         let nib = UINib(nibName: "MovieCell", bundle: nil)
         self.cltInTheaterMovie.register(nib, forCellWithReuseIdentifier: movieCell)
@@ -29,6 +43,15 @@ class InTheaterCell: UITableViewCell {
         cltInTheaterMovie.collectionViewLayout = flowLayout
         cltInTheaterMovie.delegate = self
         cltInTheaterMovie.dataSource = self
+    }
+    
+    func showMovieDetail(for id: Int) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nvc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController") as! UINavigationController
+        let vc = nvc.topViewController as! MovieDetailViewController
+        vc.movieid = id
+        nvc.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
     }
     
     func handleReloadData() {
@@ -47,7 +70,9 @@ extension InTheaterCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCell, for: indexPath) as! MovieCell
         let movie = movies[indexPath.row]
-        cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: movie.backdrop)
+        if let backdrop = movie.backdrop {
+            cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
+        }
         cell.lblTitle.text = movie.title
         cell.lblSubTitle.text = movie.title
         return cell

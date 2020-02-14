@@ -19,6 +19,7 @@ class OnTVCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    
     func collectionViewSetup() {
         let nib = UINib(nibName: "MovieCell", bundle: nil)
         self.cltMovie.register(nib, forCellWithReuseIdentifier: movieCell)
@@ -33,9 +34,11 @@ class OnTVCell: UITableViewCell {
     
     @IBAction func showMoreMovie(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "MovieListNavigationViewController")
-        vc.modalPresentationStyle = .fullScreen
-        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+        let nvc = storyboard.instantiateViewController(identifier: "MovieListNavigationViewController") as! UINavigationController
+        let vc = nvc.topViewController as! MovieListViewController
+        vc.isMovie = false
+        nvc.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
     }
     
     func handleReloadData() {
@@ -54,7 +57,10 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCell, for: indexPath as IndexPath) as! MovieCell
         let tv = televisions[indexPath.row]
-        cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: tv.backdrop)
+        if let backdrop = tv.backdrop {
+            cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
+        }
+        
         cell.lblTitle.text = tv.name
         cell.lblSubTitle.text = tv.originalName
         return cell
@@ -67,10 +73,11 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func showMovieDetail(for id: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "MovieDetailViewController") as! MovieDetailViewController
+        let nvc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController") as! UINavigationController
+        let vc = nvc.topViewController as! MovieDetailViewController
         vc.movieid = id
-        vc.modalPresentationStyle = .fullScreen
-        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+        nvc.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
     }
 }
 
