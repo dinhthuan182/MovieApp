@@ -103,6 +103,7 @@ class MovieDetailViewController: UITableViewController {
             
         }else {
             let cell = Bundle.main.loadNibNamed("SocialMovieDetailCell", owner: self, options: nil)?.first as! SocialMovieDetailCell
+            cell.setupView()
             return cell
             
         }

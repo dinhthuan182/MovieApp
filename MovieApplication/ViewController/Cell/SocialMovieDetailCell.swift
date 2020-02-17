@@ -10,15 +10,34 @@ import UIKit
 
 class SocialMovieDetailCell: UITableViewCell {
 
+    @IBOutlet weak var smcSocial: UISegmentedControl!
+    @IBOutlet weak var vSocialContainer: UIView!
+    
+    var views = [UIView]()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
+    
+    @IBAction func switchSocialTab(_ sender: UISegmentedControl) {
+        vSocialContainer.bringSubviewToFront(views[sender.selectedSegmentIndex])
+    }
+    
+    func setupView() {
+        views.append(DiscussionViewController().view)
+        views.append(ReviewViewController().view)
+        
+        for v in views {
+            vSocialContainer.addSubview(v)
+        }
+        vSocialContainer.bringSubviewToFront(views[0])
+    }
 }

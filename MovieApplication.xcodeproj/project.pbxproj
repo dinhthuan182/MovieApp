@@ -74,6 +74,12 @@
 		ADB0C73623F3E9B5005B5E42 /* FeatureMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB0C73423F3E9B5005B5E42 /* FeatureMovieCell.xib */; };
 		ADB0C73823F40004005B5E42 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0C73723F40004005B5E42 /* MovieListViewController.swift */; };
 		ADB0C73A23F4011F005B5E42 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0C73923F4011F005B5E42 /* MovieListCell.swift */; };
+		ADE8732823FA319100A10DC1 /* DiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE8732623FA319100A10DC1 /* DiscussionViewController.swift */; };
+		ADE8732923FA319100A10DC1 /* DiscussionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE8732723FA319100A10DC1 /* DiscussionViewController.xib */; };
+		ADE8732E23FA31D200A10DC1 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE8732C23FA31D200A10DC1 /* ReviewViewController.swift */; };
+		ADE8732F23FA31D200A10DC1 /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE8732D23FA31D200A10DC1 /* ReviewViewController.xib */; };
+		ADE8733223FA36D800A10DC1 /* DiscussionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE8733023FA36D800A10DC1 /* DiscussionCell.swift */; };
+		ADE8733323FA36D800A10DC1 /* DiscussionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADE8733123FA36D800A10DC1 /* DiscussionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,6 +153,12 @@
 		ADB0C73423F3E9B5005B5E42 /* FeatureMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureMovieCell.xib; sourceTree = "<group>"; };
 		ADB0C73723F40004005B5E42 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		ADB0C73923F4011F005B5E42 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
+		ADE8732623FA319100A10DC1 /* DiscussionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionViewController.swift; sourceTree = "<group>"; };
+		ADE8732723FA319100A10DC1 /* DiscussionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscussionViewController.xib; sourceTree = "<group>"; };
+		ADE8732C23FA31D200A10DC1 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		ADE8732D23FA31D200A10DC1 /* ReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewViewController.xib; sourceTree = "<group>"; };
+		ADE8733023FA36D800A10DC1 /* DiscussionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionCell.swift; sourceTree = "<group>"; };
+		ADE8733123FA36D800A10DC1 /* DiscussionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscussionCell.xib; sourceTree = "<group>"; };
 		CFC1CC0C4A27CB44D76B102D /* Pods-MovieApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApplication.debug.xcconfig"; path = "Target Support Files/Pods-MovieApplication/Pods-MovieApplication.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +287,8 @@
 				AD90BBE323F506E000720739 /* SeasonInMovieDetailCell.xib */,
 				AD90BBE623F50A6500720739 /* SocialMovieDetailCell.swift */,
 				AD90BBE723F50A6500720739 /* SocialMovieDetailCell.xib */,
+				ADE8733023FA36D800A10DC1 /* DiscussionCell.swift */,
+				ADE8733123FA36D800A10DC1 /* DiscussionCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -340,6 +354,10 @@
 				AD825F7023E96A420053975E /* CastMovieCollectionViewCell.swift */,
 				AD934C0F23ED6AAB0060FCFA /* GenresCell.swift */,
 				AD90BBC823F4EFF400720739 /* LoadMoreActivityIndicator.swift */,
+				ADE8732623FA319100A10DC1 /* DiscussionViewController.swift */,
+				ADE8732723FA319100A10DC1 /* DiscussionViewController.xib */,
+				ADE8732C23FA31D200A10DC1 /* ReviewViewController.swift */,
+				ADE8732D23FA31D200A10DC1 /* ReviewViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -428,6 +446,9 @@
 				AD8FFAF723F141870042E76D /* FeaturedCell.xib in Resources */,
 				AD8FFAF323F141100042E76D /* InTheaterCell.xib in Resources */,
 				AD90BBE123F5024000720739 /* CastInMovieDetailCell.xib in Resources */,
+				ADE8732923FA319100A10DC1 /* DiscussionViewController.xib in Resources */,
+				ADE8733323FA36D800A10DC1 /* DiscussionCell.xib in Resources */,
+				ADE8732F23FA31D200A10DC1 /* ReviewViewController.xib in Resources */,
 				AD90BBE523F506E000720739 /* SeasonInMovieDetailCell.xib in Resources */,
 				AD94B63323E3BEA2004DF36D /* LaunchScreen.storyboard in Resources */,
 				AD90BBDD23F5009D00720739 /* CastMovieDetailCell.xib in Resources */,
@@ -489,9 +510,11 @@
 				AD8C3ED423E81E2800E28F42 /* Person.swift in Sources */,
 				AD8C3EC423E80A8900E28F42 /* UIImageView+Extensions.swift in Sources */,
 				AD8C3ED023E816BF00E28F42 /* ProgramCollectionViewCell.swift in Sources */,
+				ADE8732823FA319100A10DC1 /* DiscussionViewController.swift in Sources */,
 				AD90BBE023F5024000720739 /* CastInMovieDetailCell.swift in Sources */,
 				AD825F7123E96A420053975E /* CastMovieCollectionViewCell.swift in Sources */,
 				AD8C3EDA23E8207C00E28F42 /* PersonCollectionViewController.swift in Sources */,
+				ADE8733223FA36D800A10DC1 /* DiscussionCell.swift in Sources */,
 				AD584B6523F15113001A241C /* ParameterEncoding.swift in Sources */,
 				ADB0C73823F40004005B5E42 /* MovieListViewController.swift in Sources */,
 				AD584B6723F153B6001A241C /* URLParameterEncoder.swift in Sources */,
@@ -510,6 +533,7 @@
 				AD94B62723E3BE9D004DF36D /* AppDelegate.swift in Sources */,
 				AD90BBCB23F4F77700720739 /* MovieDetailViewController.swift in Sources */,
 				AD8C3ED223E818A700E28F42 /* ProgramApi.swift in Sources */,
+				ADE8732E23FA31D200A10DC1 /* ReviewViewController.swift in Sources */,
 				AD93DF1923F28FD100C8A6D8 /* TelevisionModel.swift in Sources */,
 				AD584B5F23F14DD8001A241C /* EndPointType.swift in Sources */,
 				AD94B62923E3BE9D004DF36D /* SceneDelegate.swift in Sources */,
