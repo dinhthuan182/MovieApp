@@ -20,6 +20,8 @@ class InfoMovieDetailCell: UITableViewCell, UITextViewDelegate {
     
     @IBOutlet weak var tvOverview: UITextView!
     @IBOutlet weak var tvOverViewHC: NSLayoutConstraint!
+    @IBOutlet weak var cltCrew: UICollectionView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -17,8 +17,7 @@ class InTheaterCell: UITableViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    private let movieCell = "movieCell"
+
     var movies = [Movie]()
     
     @IBOutlet weak var lblTitle: UILabel!
@@ -43,8 +42,7 @@ class InTheaterCell: UITableViewCell {
     }
     
     func collectionViewSetup() {
-        let nib = UINib(nibName: "MovieCell", bundle: nil)
-        self.cltInTheaterMovie.register(nib, forCellWithReuseIdentifier: movieCell)
+        self.cltInTheaterMovie.register(MovieCell.nib, forCellWithReuseIdentifier: MovieCell.identifier)
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
@@ -77,7 +75,7 @@ extension InTheaterCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCell, for: indexPath) as! MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as! MovieCell
         let movie = movies[indexPath.row]
         if let backdrop = movie.backdrop {
             cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)

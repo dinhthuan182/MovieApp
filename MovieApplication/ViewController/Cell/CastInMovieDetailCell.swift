@@ -10,6 +10,14 @@ import UIKit
 
 class CastInMovieDetailCell: UICollectionViewCell {
 
+    static var identifier: String{
+        return String(describing: CastInMovieDetailCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblSubTitle: UILabel!

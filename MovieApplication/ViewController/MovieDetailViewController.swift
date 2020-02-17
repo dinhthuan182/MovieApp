@@ -106,7 +106,6 @@ class MovieDetailViewController: UITableViewController {
             
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SocialMovieDetailCell.identifier, for: indexPath) as! SocialMovieDetailCell
-            cell.setupView()
             return cell
             
         }

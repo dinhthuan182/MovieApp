@@ -17,8 +17,7 @@ class CastMovieDetailCell: UITableViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    private let castCell = "castCell"
+
     var cast = [Cast]()
     
     @IBOutlet weak var cltCasts: UICollectionView!
@@ -34,8 +33,7 @@ class CastMovieDetailCell: UITableViewCell {
     }
     
     func collectionViewSetup() {
-        let nib = UINib(nibName: "CastInMovieDetailCell", bundle: nil)
-        self.cltCasts.register(nib, forCellWithReuseIdentifier: castCell)
+        self.cltCasts.register(CastInMovieDetailCell.nib, forCellWithReuseIdentifier: CastInMovieDetailCell.identifier)
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 5
         flowLayout.minimumInteritemSpacing = 0
@@ -59,7 +57,7 @@ extension CastMovieDetailCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: castCell, for: indexPath) as! CastInMovieDetailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastInMovieDetailCell.identifier, for: indexPath) as! CastInMovieDetailCell
         let c = cast[indexPath.row]
         if let profile =  c.profilePath {
             cell.imgProfile.loadImageUsingCacheWithUrlString(imgName:profile)

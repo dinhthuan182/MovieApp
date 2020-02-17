@@ -16,8 +16,7 @@ class FeaturedCell: UITableViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    private let featureCell = "featureMovieCell"
+
     var movies = [Movie]()
     
     @IBOutlet weak var lblTitle: UILabel!
@@ -28,8 +27,7 @@ class FeaturedCell: UITableViewCell {
     }
     
     func collectionViewSetup() {
-        let nib = UINib(nibName: "FeatureMovieCell", bundle: nil)
-        self.cltFeatureMovie.register(nib, forCellWithReuseIdentifier: featureCell)
+        self.cltFeatureMovie.register(FeatureMovieCell.nib, forCellWithReuseIdentifier: FeatureMovieCell.identifier)
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10
         flowLayout.minimumInteritemSpacing = 0
@@ -54,7 +52,7 @@ extension FeaturedCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: featureCell, for: indexPath) as! FeatureMovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeatureMovieCell.identifier, for: indexPath) as! FeatureMovieCell
         let movie = movies[indexPath.row]
         if let backdrop = movie.backdrop {
             cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)

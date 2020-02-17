@@ -10,6 +10,14 @@ import UIKit
 
 class MovieCell: UICollectionViewCell {
 
+    static var identifier: String{
+        return String(describing: MovieCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     @IBOutlet weak var imgBackdrop: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblSubTitle: UILabel!

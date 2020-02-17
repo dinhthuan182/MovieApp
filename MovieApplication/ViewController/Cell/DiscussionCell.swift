@@ -9,7 +9,15 @@
 import UIKit
 
 class DiscussionCell: UITableViewCell {
-
+    
+    static var identifier: String{
+        return String(describing: DiscussionCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblDiscussion: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -18,14 +26,6 @@ class DiscussionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-    
-    static var identifier: String{
-        return String(describing: DiscussionCell.self)
-    }
-    
-    static var nib: UINib{
-        return UINib(nibName: identifier, bundle: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

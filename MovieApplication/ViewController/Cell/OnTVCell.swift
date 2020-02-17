@@ -18,7 +18,6 @@ class OnTVCell: UITableViewCell {
         return UINib(nibName: identifier, bundle: nil)
     }
     
-    private let movieCell = "movieCell"
     var televisions = [Television]()
     
     @IBOutlet weak var cltMovie: UICollectionView!
@@ -29,8 +28,7 @@ class OnTVCell: UITableViewCell {
     
     
     func collectionViewSetup() {
-        let nib = UINib(nibName: "MovieCell", bundle: nil)
-        self.cltMovie.register(nib, forCellWithReuseIdentifier: movieCell)
+        self.cltMovie.register(MovieCell.nib, forCellWithReuseIdentifier: MovieCell.identifier)
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
@@ -63,7 +61,7 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCell, for: indexPath as IndexPath) as! MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath as IndexPath) as! MovieCell
         let tv = televisions[indexPath.row]
         if let backdrop = tv.backdrop {
             cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
