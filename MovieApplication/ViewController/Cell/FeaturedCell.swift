@@ -9,6 +9,14 @@
 import UIKit
 
 class FeaturedCell: UITableViewCell {
+    static var identifier: String{
+        return String(describing: FeaturedCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     private let featureCell = "featureMovieCell"
     var movies = [Movie]()
     

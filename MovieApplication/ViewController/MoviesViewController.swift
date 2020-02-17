@@ -8,22 +8,18 @@
 
 import UIKit
 
-struct cellData {
-    let cellId: Int
-    let title: String
-}
-
 class MoviesViewController: UIViewController {
     let networkManager = NetworkManager()
-    let onTVCell = "onTVCell"
-    let cellDatas = [cellData(cellId: 1, title: "On TV"),
-                     cellData(cellId: 2, title: "In Theaters"),
-                     cellData(cellId: 3, title: "Featured List")]
     
     @IBOutlet weak var tblMovies: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Register cell
+        tblMovies.register(OnTVCell.nib, forCellReuseIdentifier: OnTVCell.identifier)
+        tblMovies.register(InTheaterCell.nib, forCellReuseIdentifier: InTheaterCell.identifier)
+        tblMovies.register(FeaturedCell.nib, forCellReuseIdentifier: FeaturedCell.identifier)
         
         tblMovies.rowHeight = UITableView.automaticDimension
         tblMovies.separatorColor = .clear
@@ -33,12 +29,13 @@ class MoviesViewController: UIViewController {
 
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellDatas.count
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if cellDatas[indexPath.row].cellId == 1 {
-            let cell = Bundle.main.loadNibNamed("OnTVCell", owner: self, options: nil)?.first as! OnTVCell
+        
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: OnTVCell.identifier, for: indexPath) as! OnTVCell
             networkManager.getAiringTodayTV(page: 1) { (responseData, error) in
                 if let error = error {
                     print(error)
@@ -50,8 +47,8 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
             }
             cell.collectionViewSetup()
             return cell
-        } else if cellDatas[indexPath.row].cellId == 2 {
-            let cell = Bundle.main.loadNibNamed("InTheaterCell", owner: self, options: nil)?.first as! InTheaterCell
+        } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: InTheaterCell.identifier, for: indexPath) as! InTheaterCell
             networkManager.getMoviesInTheater(page: 1) { (responseData, error) in
                 if let error = error {
                     print(error)
@@ -64,7 +61,7 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
             cell.collectionViewSetup()
             return cell
         } else {
-            let cell = Bundle.main.loadNibNamed("FeaturedCell", owner: self, options: nil)?.first as! FeaturedCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: FeaturedCell.identifier, for: indexPath) as! FeaturedCell
             networkManager.getFeatureds(page: 1) { (movieApiResponse, error) in
                 if let error = error {
                     print(error)
@@ -80,7 +77,7 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if cellDatas[indexPath.row].cellId == 3 {
+        if indexPath.row == 2 {
             return tableView.frame.height * 2.5 / 3
         }
         return tableView.frame.height + 50

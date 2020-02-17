@@ -10,6 +10,14 @@ import UIKit
 
 class SocialMovieDetailCell: UITableViewCell {
 
+    static var identifier: String{
+        return String(describing: SocialMovieDetailCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     @IBOutlet weak var smcSocial: UISegmentedControl!
     @IBOutlet weak var vSocialContainer: UIView!
     

@@ -10,6 +10,14 @@ import UIKit
 
 class HeaderMovieDetailCell: UITableViewCell {
 
+    static var identifier: String{
+        return String(describing: HeaderMovieDetailCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     @IBOutlet weak var imgBackdrop: UIImageView! 
     @IBOutlet weak var imgPoster: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!

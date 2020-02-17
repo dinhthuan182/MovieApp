@@ -10,6 +10,14 @@ import UIKit
 
 class OnTVCell: UITableViewCell {
     
+    static var identifier: String{
+        return String(describing: OnTVCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     private let movieCell = "movieCell"
     var televisions = [Television]()
     

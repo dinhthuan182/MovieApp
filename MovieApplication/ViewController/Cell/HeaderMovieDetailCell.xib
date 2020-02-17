@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell alpha="0.80000000000000004" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="558" id="KGk-i7-Jjw" customClass="HeaderMovieDetailCell" customModule="MovieApplication" customModuleProvider="target">
+        <tableViewCell alpha="0.80000000000000004" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderMovieDetailCell" rowHeight="558" id="KGk-i7-Jjw" customClass="HeaderMovieDetailCell" customModule="MovieApplication" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="659" height="558"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">

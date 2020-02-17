@@ -9,6 +9,15 @@
 import UIKit
 
 class InTheaterCell: UITableViewCell {
+    
+    static var identifier: String{
+        return String(describing: InTheaterCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     private let movieCell = "movieCell"
     var movies = [Movie]()
     

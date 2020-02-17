@@ -9,6 +9,15 @@
 import UIKit
 
 class CastMovieDetailCell: UITableViewCell {
+    
+    static var identifier: String{
+        return String(describing: CastMovieDetailCell.self)
+    }
+    
+    static var nib: UINib{
+        return UINib(nibName: identifier, bundle: nil)
+    }
+    
     private let castCell = "castCell"
     var cast = [Cast]()
     

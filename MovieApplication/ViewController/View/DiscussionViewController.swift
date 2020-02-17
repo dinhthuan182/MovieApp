@@ -14,8 +14,7 @@ class DiscussionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let nib = UINib(nibName: "DiscussionCell", bundle: nil)
-//        tblDiscussion.register(nib, forCellReuseIdentifier: discussionCell)
+
         tblDiscussion.register(DiscussionCell.nib, forCellReuseIdentifier: DiscussionCell.identifier)
         tblDiscussion.delegate = self
         tblDiscussion.dataSource = self

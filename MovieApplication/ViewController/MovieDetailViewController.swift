@@ -14,13 +14,16 @@ class MovieDetailViewController: UITableViewController {
     lazy var movie = Movie.init()
     lazy var television = Television.init()
     let networkManager = NetworkManager()
-    let cellArea = [cellData(cellId: 1, title: "Header"),
-                    cellData(cellId: 2, title: "Overview"),
-                    cellData(cellId: 3, title: "Cast"),
-                    cellData(cellId: 4, title: "Social")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Register cell
+        self.tableView.register(HeaderMovieDetailCell.nib, forCellReuseIdentifier: HeaderMovieDetailCell.identifier)
+        self.tableView.register(InfoMovieDetailCell.nib, forCellReuseIdentifier: InfoMovieDetailCell.identifier)
+        self.tableView.register(CastMovieDetailCell.nib, forCellReuseIdentifier: CastMovieDetailCell.identifier)
+        self.tableView.register(SocialMovieDetailCell.nib, forCellReuseIdentifier: SocialMovieDetailCell.identifier)
+        
         // Load information for movie
         getMovieInfo()
         
@@ -33,12 +36,12 @@ class MovieDetailViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return cellArea.count
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if cellArea[indexPath.row].cellId == 1 {
-            let cell = Bundle.main.loadNibNamed("HeaderMovieDetailCell", owner: self, options: nil)?.first as! HeaderMovieDetailCell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: HeaderMovieDetailCell.identifier, for: indexPath) as! HeaderMovieDetailCell
             if isMovie {
                 if let backdrop = movie.backdrop {
                     cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
@@ -62,8 +65,8 @@ class MovieDetailViewController: UITableViewController {
             }
             return cell
             
-        }else if cellArea[indexPath.row].cellId == 2 {
-            let cell = Bundle.main.loadNibNamed("InfoMovieDetailCell", owner: self, options: nil)?.first as! InfoMovieDetailCell
+        }else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: InfoMovieDetailCell.identifier, for: indexPath) as! InfoMovieDetailCell
             if isMovie {
                cell.tvOverview.text = movie.overview
             }else {
@@ -72,8 +75,8 @@ class MovieDetailViewController: UITableViewController {
             cell.setupView()
             return cell
             
-        }else if cellArea[indexPath.row].cellId == 3 {
-            let cell = Bundle.main.loadNibNamed("CastMovieDetailCell", owner: self, options: nil)?.first as! CastMovieDetailCell
+        }else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CastMovieDetailCell.identifier, for: indexPath) as! CastMovieDetailCell
             if isMovie {
                 networkManager.getMovieCredits(id: movieid) { (data, error) in
                     if let error = error {
@@ -102,7 +105,7 @@ class MovieDetailViewController: UITableViewController {
             return cell
             
         }else {
-            let cell = Bundle.main.loadNibNamed("SocialMovieDetailCell", owner: self, options: nil)?.first as! SocialMovieDetailCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: SocialMovieDetailCell.identifier, for: indexPath) as! SocialMovieDetailCell
             cell.setupView()
             return cell
             
