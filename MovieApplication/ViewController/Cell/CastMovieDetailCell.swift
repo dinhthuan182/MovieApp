@@ -21,6 +21,7 @@ class CastMovieDetailCell: UITableViewCell {
     var cast = [Cast]()
     
     @IBOutlet weak var cltCasts: UICollectionView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

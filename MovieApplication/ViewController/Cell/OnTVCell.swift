@@ -10,7 +10,7 @@ import UIKit
 
 class OnTVCell: UITableViewCell {
     
-    static var identifier: String{
+    static var identifier: String {
         return String(describing: OnTVCell.self)
     }
     
