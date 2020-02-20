@@ -35,6 +35,10 @@
 		AD8C3ED823E81FB900E28F42 /* Popular.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8C3ED723E81FB900E28F42 /* Popular.swift */; };
 		AD8C3EDA23E8207C00E28F42 /* PersonCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8C3ED923E8207C00E28F42 /* PersonCollectionViewController.swift */; };
 		AD8C3EDC23E8209600E28F42 /* PersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8C3EDB23E8209600E28F42 /* PersonCollectionViewCell.swift */; };
+		AD8DFBD023FD164D0007AB03 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8DFBCF23FD164D0007AB03 /* VideoModel.swift */; };
+		AD8DFBD223FD30DC0007AB03 /* PlayVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8DFBD123FD30DC0007AB03 /* PlayVideoViewController.swift */; };
+		AD8DFBD523FD364C0007AB03 /* CrewMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8DFBD323FD364C0007AB03 /* CrewMovieCell.swift */; };
+		AD8DFBD623FD364C0007AB03 /* CrewMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8DFBD423FD364C0007AB03 /* CrewMovieCell.xib */; };
 		AD8FFAE923F13E9F0042E76D /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8FFAE823F13E9F0042E76D /* MoviesViewController.swift */; };
 		AD8FFAEC23F13FF20042E76D /* OnTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8FFAEA23F13FF20042E76D /* OnTVCell.swift */; };
 		AD8FFAED23F13FF20042E76D /* OnTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD8FFAEB23F13FF20042E76D /* OnTVCell.xib */; };
@@ -103,6 +107,10 @@
 		AD8C3ED723E81FB900E28F42 /* Popular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popular.swift; sourceTree = "<group>"; };
 		AD8C3ED923E8207C00E28F42 /* PersonCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewController.swift; sourceTree = "<group>"; };
 		AD8C3EDB23E8209600E28F42 /* PersonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCollectionViewCell.swift; sourceTree = "<group>"; };
+		AD8DFBCF23FD164D0007AB03 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		AD8DFBD123FD30DC0007AB03 /* PlayVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayVideoViewController.swift; sourceTree = "<group>"; };
+		AD8DFBD323FD364C0007AB03 /* CrewMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewMovieCell.swift; sourceTree = "<group>"; };
+		AD8DFBD423FD364C0007AB03 /* CrewMovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CrewMovieCell.xib; sourceTree = "<group>"; };
 		AD8FFAE823F13E9F0042E76D /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		AD8FFAEA23F13FF20042E76D /* OnTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTVCell.swift; sourceTree = "<group>"; };
 		AD8FFAEB23F13FF20042E76D /* OnTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnTVCell.xib; sourceTree = "<group>"; };
@@ -230,6 +238,7 @@
 				AD93DF1823F28FD100C8A6D8 /* TelevisionModel.swift */,
 				AD83BA6423E86D350091963F /* Genre.swift */,
 				AD8A701F23F64982008EF1A8 /* CreditModel.swift */,
+				AD8DFBCF23FD164D0007AB03 /* VideoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -267,6 +276,8 @@
 				AD90BBDF23F5024000720739 /* CastInMovieDetailCell.xib */,
 				AD931E6E23FB774100B256FB /* CrewMovieDetailCell.swift */,
 				AD931E6F23FB774100B256FB /* CrewMovieDetailCell.xib */,
+				AD8DFBD323FD364C0007AB03 /* CrewMovieCell.swift */,
+				AD8DFBD423FD364C0007AB03 /* CrewMovieCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -319,6 +330,7 @@
 				AD8FFAE823F13E9F0042E76D /* MoviesViewController.swift */,
 				ADB0C73723F40004005B5E42 /* MovieListViewController.swift */,
 				AD90BBCA23F4F77700720739 /* MovieDetailViewController.swift */,
+				AD8DFBD123FD30DC0007AB03 /* PlayVideoViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -421,6 +433,7 @@
 				AD94B63323E3BEA2004DF36D /* LaunchScreen.storyboard in Resources */,
 				AD931E7123FB774100B256FB /* CrewMovieDetailCell.xib in Resources */,
 				AD90BBDD23F5009D00720739 /* CastMovieDetailCell.xib in Resources */,
+				AD8DFBD623FD364C0007AB03 /* CrewMovieCell.xib in Resources */,
 				AD94B63023E3BEA2004DF36D /* Assets.xcassets in Resources */,
 				AD94B62E23E3BE9D004DF36D /* Main.storyboard in Resources */,
 			);
@@ -499,11 +512,14 @@
 				AD584B6123F14EA8001A241C /* HTTPMethod.swift in Sources */,
 				AD94B62723E3BE9D004DF36D /* AppDelegate.swift in Sources */,
 				AD90BBCB23F4F77700720739 /* MovieDetailViewController.swift in Sources */,
+				AD8DFBD223FD30DC0007AB03 /* PlayVideoViewController.swift in Sources */,
 				AD8C3ED223E818A700E28F42 /* ProgramApi.swift in Sources */,
+				AD8DFBD023FD164D0007AB03 /* VideoModel.swift in Sources */,
 				AD93DF1923F28FD100C8A6D8 /* TelevisionModel.swift in Sources */,
 				AD584B5F23F14DD8001A241C /* EndPointType.swift in Sources */,
 				AD94B62923E3BE9D004DF36D /* SceneDelegate.swift in Sources */,
 				AD93DF1F23F29DC700C8A6D8 /* TelevisionEndPoint.swift in Sources */,
+				AD8DFBD523FD364C0007AB03 /* CrewMovieCell.swift in Sources */,
 				AD8C3ECE23E8160400E28F42 /* ProgramCollectionViewController.swift in Sources */,
 				AD8A702023F64982008EF1A8 /* CreditModel.swift in Sources */,
 				AD90BBDC23F5009D00720739 /* CastMovieDetailCell.swift in Sources */,
@@ -672,6 +688,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N75JT3WM6J;
 				INFOPLIST_FILE = MovieApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -691,6 +708,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N75JT3WM6J;
 				INFOPLIST_FILE = MovieApplication/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

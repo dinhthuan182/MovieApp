@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 12.0, *)
 class MovieListViewController: UITableViewController {
     let networkManager = NetworkManager()
     let movieListCellId = "MovieListCell"
@@ -93,11 +94,12 @@ class MovieListViewController: UITableViewController {
     
     func setupNavigationBar() {
         // Setup back button
-        let btnBack = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.left"), style: .plain, target: self, action: #selector(backtoBeforeView))
+        let btnBack = UIBarButtonItem(image: UIImage(named: "back_icon"), style: .plain, target: self, action: #selector(backtoBeforeView))
         btnBack.tintColor = .gray
         self.navigationItem.title = "On TV"
         self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25)]
         self.navigationItem.leftBarButtonItem = btnBack
+        
     }
     
     @objc func backtoBeforeView() {
@@ -106,7 +108,7 @@ class MovieListViewController: UITableViewController {
     
     func showMovieDetail(id: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nvc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController") as! UINavigationController
+        let nvc = storyboard.instantiateViewController(withIdentifier: "MovieDetailNavigationViewController") as! UINavigationController
         let vc = nvc.topViewController as! MovieDetailViewController
         vc.movieid = id
         vc.isMovie = isMovie

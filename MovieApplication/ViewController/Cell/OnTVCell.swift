@@ -38,9 +38,10 @@ class OnTVCell: UITableViewCell {
         cltMovie.delegate = self
     }
     
+
     @IBAction func showMoreMovie(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nvc = storyboard.instantiateViewController(identifier: "MovieListNavigationViewController") as! UINavigationController
+        let nvc = storyboard.instantiateViewController(withIdentifier: "MovieListNavigationViewController") as! UINavigationController
         let vc = nvc.topViewController as! MovieListViewController
         vc.isMovie = false
         nvc.modalPresentationStyle = .fullScreen
@@ -79,7 +80,7 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func showMovieDetail(for id: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nvc = storyboard.instantiateViewController(identifier: "MovieDetailNavigationViewController") as! UINavigationController
+        let nvc = storyboard.instantiateViewController(withIdentifier: "MovieDetailNavigationViewController") as! UINavigationController
         let vc = nvc.topViewController as! MovieDetailViewController
         vc.movieid = id
         vc.isMovie = false

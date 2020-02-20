@@ -123,6 +123,34 @@ struct NetworkManager {
         }
     }
     
+    func getMovieTrailer(for id: Int, completion: @escaping (_ videoApiResponse: VideoApiResponse?, _ error: String?) -> ()) {
+        movieRouter.request(.video(id: id)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+               let result = self.handleNetworkResponse(response)
+               switch result {
+               case .success:
+                   guard let responseData = data else {
+                       completion(nil, NetworkResponse.noData.rawValue)
+                       return
+                   }
+                   
+                   do {
+                       let apiResponse = try JSONDecoder().decode(VideoApiResponse.self, from: responseData)
+                    completion(apiResponse, nil)
+                   }catch {
+                       completion(nil, NetworkResponse.unableToDecode.rawValue)
+                   }
+               case .failure(let networkFailureError):
+                   completion(nil, networkFailureError)
+               }
+            }
+        }
+    }
+    
     func getAiringTodayTV(page: Int, completion: @escaping (_ televisionData: TelevisionApiResponse?, _ error: String?) -> ()) {
         tvRouter.request(.airingToday(page: page)) { (data, response, error) in
             if error != nil {
@@ -224,6 +252,34 @@ struct NetworkManager {
                    
                    do {
                        let apiResponse = try JSONDecoder().decode(CreditApiResponse.self, from: responseData)
+                    completion(apiResponse, nil)
+                   }catch {
+                       completion(nil, NetworkResponse.unableToDecode.rawValue)
+                   }
+               case .failure(let networkFailureError):
+                   completion(nil, networkFailureError)
+               }
+            }
+        }
+    }
+    
+    func getTelevisonTrailer(for id: Int, completion: @escaping (_ videoApiResponse: VideoApiResponse?, _ error: String?) -> ()) {
+        tvRouter.request(.video(id: id)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+               let result = self.handleNetworkResponse(response)
+               switch result {
+               case .success:
+                   guard let responseData = data else {
+                       completion(nil, NetworkResponse.noData.rawValue)
+                       return
+                   }
+                   
+                   do {
+                       let apiResponse = try JSONDecoder().decode(VideoApiResponse.self, from: responseData)
                     completion(apiResponse, nil)
                    }catch {
                        completion(nil, NetworkResponse.unableToDecode.rawValue)

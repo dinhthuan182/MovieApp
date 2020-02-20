@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class MovieDetailViewController: UITableViewController {
     var movieid: Int = 0
@@ -15,15 +14,6 @@ class MovieDetailViewController: UITableViewController {
     lazy var movie = Movie.init()
     lazy var television = Television.init()
     let networkManager = NetworkManager()
-    var playerLayer: AVPlayerLayer?
-    var player: AVPlayer?
-    var bubbleView: UIView?
-    var vTrailerContainer: UIView?
-    var btnCloseTrailer: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "close_icon"), for: .normal)
-        return btn
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +21,7 @@ class MovieDetailViewController: UITableViewController {
         // Register cell
         self.tableView.register(HeaderMovieDetailCell.nib, forCellReuseIdentifier: HeaderMovieDetailCell.identifier)
         self.tableView.register(InfoMovieDetailCell.nib, forCellReuseIdentifier: InfoMovieDetailCell.identifier)
+        self.tableView.register(CrewMovieCell.nib, forCellReuseIdentifier: CrewMovieCell.identifier)
         self.tableView.register(CastMovieDetailCell.nib, forCellReuseIdentifier: CastMovieDetailCell.identifier)
         
         // Load information for movie
@@ -45,7 +36,7 @@ class MovieDetailViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,7 +54,7 @@ class MovieDetailViewController: UITableViewController {
                 }
                 
                 cell.lblTitle.text = movie.title
-            }else {
+            } else {
                 if let backdrop = television.backdrop {
                     cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
                 }
@@ -76,30 +67,38 @@ class MovieDetailViewController: UITableViewController {
             }
             return cell
             
-        }else if indexPath.row == 1 {
+        } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: InfoMovieDetailCell.identifier, for: indexPath) as! InfoMovieDetailCell
 
             if isMovie {
                 cell.tvOverview.text = movie.overview
+            }else {
+                cell.tvOverview.text = television.overview
+            }
+            cell.setupView()
+            return cell
+            
+        } else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CrewMovieCell.identifier, for: indexPath) as! CrewMovieCell
+            if isMovie {
                 networkManager.getMovieCredits(id: movieid) { (data, error) in
                     if let error = error {
                         print(error)
                     }
                     
                     if let credit = data {
-                        cell.crews = credit.crew
+                        cell.filterCrew = self.filterCrewData(crews: credit.crew)
                         cell.handleReloadData()
                     }
                 }
             }else {
-                cell.tvOverview.text = television.overview
                 networkManager.getTelevisionCredits(id: movieid) { (data, error) in
                     if let error = error {
                         print(error)
                     }
                     
                     if let credit = data {
-                        cell.crews = credit.crew
+                        cell.filterCrew = self.filterCrewData(crews: credit.crew)
                         cell.handleReloadData()
                     }
                 }
@@ -107,7 +106,7 @@ class MovieDetailViewController: UITableViewController {
             cell.setupView()
             return cell
             
-        }else {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CastMovieDetailCell.identifier, for: indexPath) as! CastMovieDetailCell
             if isMovie {
                 networkManager.getMovieCredits(id: movieid) { (data, error) in
@@ -120,7 +119,7 @@ class MovieDetailViewController: UITableViewController {
                         cell.handleReloadData()
                     }
                 }
-            }else {
+            } else {
                 networkManager.getTelevisionCredits(id: movieid) { (data, error) in
                     if let error = error {
                         print(error)
@@ -144,7 +143,7 @@ class MovieDetailViewController: UITableViewController {
     
     func setupNavigationBar() {
         // Setup back button
-        let btnBack = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.left"), style: .plain, target: self, action: #selector(backtoBeforeView))
+        let btnBack = UIBarButtonItem(image: UIImage(named: "back_icon"), style: .plain, target: self, action: #selector(backtoBeforeView))
         btnBack.tintColor = .gray
         self.navigationItem.leftBarButtonItem = btnBack
     }
@@ -184,51 +183,69 @@ class MovieDetailViewController: UITableViewController {
             }
         }
     }
+    
+    func filterCrewData(crews: [Crew]) -> [Crew]{
+        var filterCrew = [Crew]()
+        for crew in crews {
+            var flag = false
+            for item in filterCrew {
+                if crew.job == item.job {
+                    flag = true
+                }
+            }
+            
+            if !flag {
+                filterCrew.append(crew)
+            }
+            
+            if filterCrew.count >= 10 {
+                break
+            }
+        }
+        return filterCrew
+    }
 }
 
 extension MovieDetailViewController: HeaderCellDelagate {
-    func playTrailer(for key: String) {
-        let videoUrl = URL(string: "https://www.youtube.com/watch?v=\(key)")
-        player = AVPlayer(url: videoUrl!)
-        playerLayer = AVPlayerLayer(player: player)
-        
-        if let keyWindow = UIApplication.shared.connectedScenes
-        .filter({$0.activationState == .foregroundActive})
-        .map({$0 as? UIWindowScene})
-        .compactMap({$0})
-        .first?.windows
-        .filter({$0.isKeyWindow}).first {
-            
-            vTrailerContainer = UIView(frame: keyWindow.frame)
-            vTrailerContainer?.backgroundColor = .black
-            vTrailerContainer?.alpha = 0
-            
-            btnCloseTrailer.isHidden = false
-            //btnCloseTrailer?.tintColor = .white
-            btnCloseTrailer.frame = CGRect(x: keyWindow.frame.width - 50, y: 20, width: 30, height: 30)
-            btnCloseTrailer.addTarget(self, action: #selector(handleZoomOut(tapGuesture:)), for: .touchUpInside)
-            //btnCloseTrailer?.backgroundColor = .red
-            bubbleView = UIView(frame: CGRect(x: 0, y: keyWindow.frame.height / 3, width: keyWindow.frame.width, height: 250))
-            playerLayer?.frame = bubbleView!.frame
-            bubbleView!.layer.addSublayer(playerLayer!)
-            
-            keyWindow.addSubview(vTrailerContainer!)
-            keyWindow.addSubview(btnCloseTrailer)
-            keyWindow.addSubview(bubbleView!)
-            print(btnCloseTrailer.frame)
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-                self.vTrailerContainer?.alpha = 1
-                self.btnCloseTrailer.alpha = 1
-                self.player?.play()
-            }, completion: nil)
+    func playTrailer() {
+        if isMovie {
+            networkManager.getMovieTrailer(for: movieid) { (response, error) in
+                if let err = error {
+                    print(err)
+                }
+                if let video = response?.videos.first {
+                    self.showVideo(for: video.key)
+                }
+            }
+        } else {
+            networkManager.getTelevisonTrailer(for: movieid) { (response, error) in
+                if let err = error {
+                    print(err)
+                }
+                if let video = response?.videos.first {
+                    self.showVideo(for: video.key)
+                }
+            }
         }
     }
     
-    @objc func handleZoomOut(tapGuesture: UITapGestureRecognizer) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.vTrailerContainer?.alpha = 0
-            self.btnCloseTrailer.isHidden = true
-            self.bubbleView?.alpha = 0
-        }, completion: nil)
+    func showVideo(for key: String)  {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "PlayVideoViewController") as! PlayVideoViewController
+             vc.videoKey = key
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
     }
+}
+
+extension MovieDetailViewController: CastDelegate {
+    func showPersonDetail(person: Person) {
+        let controller = PersonDetailViewController()
+        controller.person = person
+        self.present(controller, animated: true)
+    }
+    
+    
 }

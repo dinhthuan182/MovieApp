@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LOi-N6-QNz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -276,6 +277,51 @@
             </objects>
             <point key="canvasLocation" x="7263.7681159420299" y="-125.22321428571428"/>
         </scene>
+        <!--Play Video View Controller-->
+        <scene sceneID="Lt7-Xf-qVR">
+            <objects>
+                <viewController storyboardIdentifier="PlayVideoViewController" id="Hx0-Pb-uMJ" customClass="PlayVideoViewController" customModule="MovieApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gnL-et-GfN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlD-Nc-hLJ">
+                                <rect key="frame" x="384" y="64" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="3Ld-Nv-KAH"/>
+                                    <constraint firstAttribute="width" constant="20" id="b5I-2V-aU8"/>
+                                </constraints>
+                                <state key="normal" image="close_icon"/>
+                                <connections>
+                                    <action selector="closeTrailerClicked:" destination="Hx0-Pb-uMJ" eventType="touchUpInside" id="gdQ-yS-zVa"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2I-VO-5OS" customClass="YTPlayerView">
+                                <rect key="frame" x="0.0" y="274" width="414" height="250"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="pR8-ZO-duo"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="k2I-VO-5OS" firstAttribute="leading" secondItem="kKq-Sx-hyf" secondAttribute="leading" id="0iD-S6-x4z"/>
+                            <constraint firstItem="NlD-Nc-hLJ" firstAttribute="top" secondItem="kKq-Sx-hyf" secondAttribute="top" constant="20" id="OYc-wE-hyW"/>
+                            <constraint firstItem="k2I-VO-5OS" firstAttribute="top" secondItem="NlD-Nc-hLJ" secondAttribute="bottom" constant="190" id="cG9-EX-40b"/>
+                            <constraint firstItem="kKq-Sx-hyf" firstAttribute="trailing" secondItem="NlD-Nc-hLJ" secondAttribute="trailing" constant="10" id="jRQ-zT-aaA"/>
+                            <constraint firstItem="kKq-Sx-hyf" firstAttribute="trailing" secondItem="k2I-VO-5OS" secondAttribute="trailing" id="rxP-Ho-jdt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kKq-Sx-hyf"/>
+                    </view>
+                    <connections>
+                        <outlet property="videoView" destination="k2I-VO-5OS" id="c6D-71-LOE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X7Q-2y-T1m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8151" y="-125"/>
+        </scene>
         <!--Series-->
         <scene sceneID="f5v-LL-ean">
             <objects>
@@ -352,6 +398,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="close_icon" width="60" height="60"/>
         <image name="film" catalog="system" width="64" height="46"/>
         <image name="film.fill" catalog="system" width="64" height="46"/>
         <image name="ironman_backrop" width="660" height="330"/>

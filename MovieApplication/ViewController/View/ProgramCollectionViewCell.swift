@@ -28,7 +28,9 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         self.addSubview(lblProgramName)
         
         self.layer.borderWidth = 1
-        self.layer.borderColor = CGColor(srgbRed: 41, green: 41, blue: 51, alpha: 1)
+        if #available(iOS 13.0, *) {
+            self.layer.borderColor = CGColor(srgbRed: 41, green: 41, blue: 51, alpha: 1)
+        }
         // Autolayout for imgMovie
         NSLayoutConstraint.activate([
             imgProgram.topAnchor.constraint(equalTo: contentView.topAnchor),

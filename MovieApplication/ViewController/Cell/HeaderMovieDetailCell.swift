@@ -9,8 +9,7 @@
 import UIKit
 
 protocol HeaderCellDelagate {
-    func playTrailer(for key: String)
-    
+    func playTrailer()
 }
 
 class HeaderMovieDetailCell: UITableViewCell {
@@ -35,6 +34,6 @@ class HeaderMovieDetailCell: UITableViewCell {
     }
     
     @IBAction func playTrailerClicked(_ sender: Any) {
-        delegate?.playTrailer(for: "2LqzF5WauAw")
+        delegate?.playTrailer()
     }
 }

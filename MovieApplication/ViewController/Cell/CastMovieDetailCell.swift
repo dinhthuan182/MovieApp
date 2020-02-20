@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CastDelegate {
+    func showPersonDetail(person: Person)
+}
+
 class CastMovieDetailCell: UITableViewCell {
     
     static var identifier: String{
@@ -20,6 +24,7 @@ class CastMovieDetailCell: UITableViewCell {
 
     var cast = [Cast]()
     
+    var delegate: CastDelegate?
     @IBOutlet weak var cltCasts: UICollectionView!
     
     override func awakeFromNib() {
@@ -67,6 +72,15 @@ extension CastMovieDetailCell: UICollectionViewDelegate, UICollectionViewDataSou
         cell.lblName.text = c.name
         cell.lblSubTitle.text = c.character
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let c = cast[indexPath.row]
+        Api.person.getPersonDetail(with: c.id, onSuccess: { (person) in
+            self.delegate?.showPersonDetail(person: person)
+        }) { (error) in
+            print("Load person detail error: ", error)
+        }
     }
 }
 

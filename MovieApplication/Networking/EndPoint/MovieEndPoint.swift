@@ -77,7 +77,7 @@ extension MovieApi: EndPointType {
         case .infomation:
             return .requestParameters(bodyParameters: nil, urlParameters: ["api_key":NetworkManager.MovieAPIKey])
             
-        case .credits:
+        case .credits, .video:
             return .requestParameters(bodyParameters: nil, urlParameters: ["api_key":NetworkManager.MovieAPIKey])
         default:
             return .request
