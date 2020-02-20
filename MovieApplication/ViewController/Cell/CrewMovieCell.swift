@@ -8,12 +8,16 @@
 
 import UIKit
 
+
 class CrewMovieCell: UITableViewCell {
     
+    // MARK: - @IBOutlet
     @IBOutlet weak var cltCrew: UICollectionView!
-        
+    
+    // MARK: - properties
     var filterCrew = [Crew]()
     
+    // MARK: - static properties
     static var identifier: String{
         return String(describing: CrewMovieCell.self)
     }
@@ -41,12 +45,12 @@ class CrewMovieCell: UITableViewCell {
     
     func handleReloadData() {
         DispatchQueue.main.async {
-            self.cltCrew.frame = CGRect(x: self.cltCrew.frame.minX, y: self.cltCrew.frame.minY, width: self.cltCrew.frame.height, height: CGFloat(self.filterCrew.count / 2 * 55))
             self.cltCrew.reloadData()
         }
     }
 }
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension CrewMovieCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filterCrew.count
@@ -61,6 +65,7 @@ extension CrewMovieCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension CrewMovieCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 2 - 5, height: 50)

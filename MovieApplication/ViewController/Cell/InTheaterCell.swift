@@ -9,7 +9,15 @@
 import UIKit
 
 class InTheaterCell: UITableViewCell {
+
+    // MARK: - @IBOutlet
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var cltInTheaterMovie: UICollectionView!
     
+    // MARK: - properties
+    var movies = [Movie]()
+    
+    // MARK: - static properties
     static var identifier: String{
         return String(describing: InTheaterCell.self)
     }
@@ -17,11 +25,6 @@ class InTheaterCell: UITableViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-
-    var movies = [Movie]()
-    
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var cltInTheaterMovie: UICollectionView!
     
     override class func awakeFromNib() {
         super.awakeFromNib()

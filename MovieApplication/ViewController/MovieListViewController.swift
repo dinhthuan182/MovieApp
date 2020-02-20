@@ -8,8 +8,9 @@
 
 import UIKit
 
-@available(iOS 12.0, *)
 class MovieListViewController: UITableViewController {
+    
+    // MARK: - properties
     let networkManager = NetworkManager()
     let movieListCellId = "MovieListCell"
     var televisonList = [Television]()
@@ -19,8 +20,6 @@ class MovieListViewController: UITableViewController {
     var totalPage = 1
     fileprivate var activityIndicator: LoadMoreActivityIndicator!
     
-    @IBOutlet var tblMovie: UITableView!
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
@@ -28,12 +27,12 @@ class MovieListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getData(page: currentPage)
-        activityIndicator = LoadMoreActivityIndicator(scrollView: tblMovie, spacingFromLastCell: 10, spacingFromLastCellWhenLoadMoreActionStart: 60)
+        activityIndicator = LoadMoreActivityIndicator(scrollView: self.tableView, spacingFromLastCell: 10, spacingFromLastCellWhenLoadMoreActionStart: 60)
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if isMovie {
@@ -41,11 +40,11 @@ class MovieListViewController: UITableViewController {
         }else {
             return televisonList.count
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: movieListCellId, for: indexPath) as! MovieListCell
+        
         if isMovie {
             let movie = movieList[indexPath.row]
             if let backdrop = movie.backdrop {
@@ -53,6 +52,7 @@ class MovieListViewController: UITableViewController {
             }
             cell.lblTitle.text = movie.title
             cell.lblDate.text = "First air date: " + movie.releaseDate
+            
         }else {
             let tv = televisonList[indexPath.row]
             if let backdrop = tv.backdrop {
@@ -75,6 +75,7 @@ class MovieListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if isMovie {
             let movie = movieList[indexPath.row]
             showMovieDetail(id: movie.id)
@@ -82,12 +83,11 @@ class MovieListViewController: UITableViewController {
             let tv = televisonList[indexPath.row]
             showMovieDetail(id: tv.id)
         }
-        
     }
     
     func handleReloadData() {
         DispatchQueue.main.async {
-            self.tblMovie.reloadData()
+            self.tableView.reloadData()
             self.activityIndicator.stop()
         }
     }
@@ -99,7 +99,6 @@ class MovieListViewController: UITableViewController {
         self.navigationItem.title = "On TV"
         self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25)]
         self.navigationItem.leftBarButtonItem = btnBack
-        
     }
     
     @objc func backtoBeforeView() {
@@ -117,6 +116,7 @@ class MovieListViewController: UITableViewController {
     }
     
     func getData(page: Int) {
+        
         if isMovie {
             // Get movie
             networkManager.getMoviesInTheater(page: page) { (responseData, error) in
@@ -131,6 +131,7 @@ class MovieListViewController: UITableViewController {
                     self.handleReloadData()
                 }
             }
+            
         }else {
             // Get movie
             networkManager.getAiringTodayTV(page: page) { (responseData, error) in
@@ -146,6 +147,5 @@ class MovieListViewController: UITableViewController {
                 }
             }
         }
-        
     }
 }

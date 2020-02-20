@@ -9,7 +9,13 @@
 import UIKit
 
 class MovieCell: UICollectionViewCell {
-
+    
+    // MARK: - @IBOutlet
+    @IBOutlet weak var imgBackdrop: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblSubTitle: UILabel!
+    
+    // MARK: - static properties
     static var identifier: String{
         return String(describing: MovieCell.self)
     }
@@ -17,10 +23,6 @@ class MovieCell: UICollectionViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    @IBOutlet weak var imgBackdrop: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblSubTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

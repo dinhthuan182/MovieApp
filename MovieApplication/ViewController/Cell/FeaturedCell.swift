@@ -9,6 +9,15 @@
 import UIKit
 
 class FeaturedCell: UITableViewCell {
+
+    // MARK: - @IBOutlet
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var cltFeatureMovie: UICollectionView!
+    
+    // MARK: - properties
+    var movies = [Movie]()
+    
+    // MARK: - static properties
     static var identifier: String{
         return String(describing: FeaturedCell.self)
     }
@@ -16,11 +25,6 @@ class FeaturedCell: UITableViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-
-    var movies = [Movie]()
-    
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var cltFeatureMovie: UICollectionView!
     
     override class func awakeFromNib() {
         super.awakeFromNib()

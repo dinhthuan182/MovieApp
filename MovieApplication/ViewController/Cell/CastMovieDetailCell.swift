@@ -14,6 +14,14 @@ protocol CastDelegate {
 
 class CastMovieDetailCell: UITableViewCell {
     
+    // MARK: - @IBOutlet
+    @IBOutlet weak var cltCasts: UICollectionView!
+    
+    // MARK: - properties
+    var cast = [Cast]()
+    var delegate: CastDelegate?
+    
+    // MARK: - static properties
     static var identifier: String{
         return String(describing: CastMovieDetailCell.self)
     }
@@ -21,11 +29,6 @@ class CastMovieDetailCell: UITableViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-
-    var cast = [Cast]()
-    
-    var delegate: CastDelegate?
-    @IBOutlet weak var cltCasts: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,6 +60,7 @@ class CastMovieDetailCell: UITableViewCell {
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+
 extension CastMovieDetailCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cast.count
@@ -76,6 +80,7 @@ extension CastMovieDetailCell: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let c = cast[indexPath.row]
+        
         Api.person.getPersonDetail(with: c.id, onSuccess: { (person) in
             self.delegate?.showPersonDetail(person: person)
         }) { (error) in

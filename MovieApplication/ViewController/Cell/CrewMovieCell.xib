@@ -30,7 +30,7 @@
                         <rect key="frame" x="10" y="45" width="300" height="172"/>
                         <color key="backgroundColor" red="0.31713297959999998" green="0.20894569160000001" blue="0.19946980480000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="5" id="ehG-Es-Rem"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="110" id="ehG-Es-Rem"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fg4-9h-6at">
                             <size key="itemSize" width="50" height="50"/>

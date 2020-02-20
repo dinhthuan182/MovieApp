@@ -13,7 +13,16 @@ protocol HeaderCellDelagate {
 }
 
 class HeaderMovieDetailCell: UITableViewCell {
-
+    
+    // MARK: - @IBOutlet
+    @IBOutlet weak var imgBackdrop: UIImageView! 
+    @IBOutlet weak var imgPoster: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
+    
+    // MARK: - properties
+    var delegate: HeaderCellDelagate?
+    
+    // MARK: - static properties
     static var identifier: String {
         return String(describing: HeaderMovieDetailCell.self)
     }
@@ -21,12 +30,6 @@ class HeaderMovieDetailCell: UITableViewCell {
     static var nib: UINib {
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    @IBOutlet weak var imgBackdrop: UIImageView! 
-    @IBOutlet weak var imgPoster: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    
-    var delegate: HeaderCellDelagate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

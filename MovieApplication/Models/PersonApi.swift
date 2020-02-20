@@ -25,7 +25,6 @@ class PersonApi {
     }
     
     func getPersonDetail(with personId: Int, onSuccess: @escaping(_ result: Person) -> Void, onError: @escaping(_ errorMessage: String) -> Void ) {
-        print(personId)
         let urlString: String = ROOT_LINK + PERSON + String(personId) + API_KEY
         
         AF.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in

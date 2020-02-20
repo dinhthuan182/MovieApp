@@ -9,6 +9,8 @@
 import UIKit
 
 class MovieDetailViewController: UITableViewController {
+    
+    // MARK: - properties
     var movieid: Int = 0
     var isMovie = true
     lazy var movie = Movie.init()
@@ -23,27 +25,30 @@ class MovieDetailViewController: UITableViewController {
         self.tableView.register(InfoMovieDetailCell.nib, forCellReuseIdentifier: InfoMovieDetailCell.identifier)
         self.tableView.register(CrewMovieCell.nib, forCellReuseIdentifier: CrewMovieCell.identifier)
         self.tableView.register(CastMovieDetailCell.nib, forCellReuseIdentifier: CastMovieDetailCell.identifier)
+        // Set auto size for cell
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         
         // Load information for movie
         getMovieInfo()
-        
+        // Set navigation abr
         setupNavigationBar()
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = UITableView.automaticDimension
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 4
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // Header Cell
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HeaderMovieDetailCell.identifier, for: indexPath) as! HeaderMovieDetailCell
             cell.delegate = self
             
+            // Check if is movie will load data of movie else load data from television
             if isMovie {
                 if let backdrop = movie.backdrop {
                     cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
@@ -54,6 +59,7 @@ class MovieDetailViewController: UITableViewController {
                 }
                 
                 cell.lblTitle.text = movie.title
+                
             } else {
                 if let backdrop = television.backdrop {
                     cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
@@ -64,22 +70,29 @@ class MovieDetailViewController: UITableViewController {
                 }
                 
                 cell.lblTitle.text = television.name
+                
             }
             return cell
-            
+        
+        // Overview cell
         } else if indexPath.row == 1 {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: InfoMovieDetailCell.identifier, for: indexPath) as! InfoMovieDetailCell
 
             if isMovie {
                 cell.tvOverview.text = movie.overview
-            }else {
+            } else {
                 cell.tvOverview.text = television.overview
             }
+            
             cell.setupView()
             return cell
-            
+           
+        // Featured cell
         } else if indexPath.row == 2 {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: CrewMovieCell.identifier, for: indexPath) as! CrewMovieCell
+            
             if isMovie {
                 networkManager.getMovieCredits(id: movieid) { (data, error) in
                     if let error = error {
@@ -91,7 +104,7 @@ class MovieDetailViewController: UITableViewController {
                         cell.handleReloadData()
                     }
                 }
-            }else {
+            } else {
                 networkManager.getTelevisionCredits(id: movieid) { (data, error) in
                     if let error = error {
                         print(error)
@@ -105,9 +118,11 @@ class MovieDetailViewController: UITableViewController {
             }
             cell.setupView()
             return cell
-            
+        
+        // Cast cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CastMovieDetailCell.identifier, for: indexPath) as! CastMovieDetailCell
+            
             if isMovie {
                 networkManager.getMovieCredits(id: movieid) { (data, error) in
                     if let error = error {
@@ -152,12 +167,14 @@ class MovieDetailViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    // Reload for tableview
     func handleReloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
+    // Get infomation of movie or televison
     func getMovieInfo() {
         if isMovie {
             networkManager.getMovieInfomation(id: movieid) { (movie, error) in
@@ -170,6 +187,7 @@ class MovieDetailViewController: UITableViewController {
                     self.handleReloadData()
                 }
             }
+            
         }else {
             networkManager.getTelevisonInfomation(id: movieid) { (television, error) in
                 if let err = error {
@@ -184,6 +202,7 @@ class MovieDetailViewController: UITableViewController {
         }
     }
     
+    // Filter Crew data loaded
     func filterCrewData(crews: [Crew]) -> [Crew]{
         var filterCrew = [Crew]()
         for crew in crews {
@@ -206,6 +225,8 @@ class MovieDetailViewController: UITableViewController {
     }
 }
 
+
+// MARK: - HeaderCellDelagate
 extension MovieDetailViewController: HeaderCellDelagate {
     func playTrailer() {
         if isMovie {
@@ -233,19 +254,20 @@ extension MovieDetailViewController: HeaderCellDelagate {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "PlayVideoViewController") as! PlayVideoViewController
-             vc.videoKey = key
+            vc.videoKey = key
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
         }
     }
 }
 
+
+// MARK: - CastDelegate
 extension MovieDetailViewController: CastDelegate {
     func showPersonDetail(person: Person) {
         let controller = PersonDetailViewController()
         controller.person = person
         self.present(controller, animated: true)
     }
-    
-    
 }
+

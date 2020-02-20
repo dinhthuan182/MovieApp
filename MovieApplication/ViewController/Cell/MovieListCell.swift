@@ -9,10 +9,15 @@
 import UIKit
 
 class MovieListCell: UITableViewCell {
-
+    // MARK: - @IBOutlet
     @IBOutlet weak var imgBackDrop: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDate: UILabel!
+    
+    // MARK: - static properties
+    static var identifier: String{
+        return String(describing: MovieListCell.self)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

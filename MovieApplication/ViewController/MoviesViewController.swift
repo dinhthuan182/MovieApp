@@ -9,9 +9,12 @@
 import UIKit
 
 class MoviesViewController: UIViewController {
-    let networkManager = NetworkManager()
     
+    // MARK: - @IBOutlet
     @IBOutlet weak var tblMovies: UITableView!
+    
+    // MARK: - properties
+    let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +26,10 @@ class MoviesViewController: UIViewController {
         
         tblMovies.rowHeight = UITableView.automaticDimension
         tblMovies.separatorColor = .clear
-        
     }
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3

@@ -250,9 +250,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="4eM-hk-Ry2"/>
-                    <connections>
-                        <outlet property="tblMovie" destination="Mfa-sc-bbE" id="QWH-Lo-6iO"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRK-lE-PK7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

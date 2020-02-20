@@ -51,7 +51,9 @@ class PersonCollectionViewController: UICollectionViewController {
         let actor = popularPerson[indexPath.row]
         
         Api.person.getPersonDetail(with: actor.id, onSuccess: { (person) in
-            self.showPersonDetail(person: person)
+            let controller = PersonDetailViewController()
+            controller.person = person
+            self.navigationController?.pushViewController(controller, animated: true)
         }) { (error) in
             print("Load person detail error: ", error)
         }
@@ -75,11 +77,6 @@ class PersonCollectionViewController: UICollectionViewController {
         }
     }
     
-    func showPersonDetail(person: Person) {
-        let controller = PersonDetailViewController()
-        controller.person = person
-        navigationController?.pushViewController(controller, animated: true)
-    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

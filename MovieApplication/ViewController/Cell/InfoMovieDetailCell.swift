@@ -10,8 +10,10 @@ import UIKit
 
 class InfoMovieDetailCell: UITableViewCell, UITextViewDelegate {
     
+    // MARK: - @IBOutlet
     @IBOutlet weak var tvOverview: UITextView!
     
+    // MARK: - static properties
     static var identifier: String{
         return String(describing: InfoMovieDetailCell.self)
     }

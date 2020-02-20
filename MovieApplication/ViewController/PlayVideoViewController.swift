@@ -10,19 +10,22 @@ import UIKit
 import youtube_ios_player_helper
 
 class PlayVideoViewController: UIViewController {
-    var videoKey: String?
     
+    // MARK: - @IBOutlet
     @IBOutlet weak var videoView: YTPlayerView!
+    
+    // MARK: - properties
+    var videoKey: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let key = videoKey {
             print("key: ", key)
             DispatchQueue.main.async {
                 self.videoView.load(withVideoId: key)
             }
         }
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func closeTrailerClicked(_ sender: Any) {

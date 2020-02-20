@@ -9,7 +9,13 @@
 import UIKit
 
 class OnTVCell: UITableViewCell {
+    // MARK: - @IBOutlet
+    @IBOutlet weak var cltMovie: UICollectionView!
     
+    // MARK: - properties
+    var televisions = [Television]()
+    
+    // MARK: - static properties
     static var identifier: String {
         return String(describing: OnTVCell.self)
     }
@@ -18,14 +24,18 @@ class OnTVCell: UITableViewCell {
         return UINib(nibName: identifier, bundle: nil)
     }
     
-    var televisions = [Television]()
-    
-    @IBOutlet weak var cltMovie: UICollectionView!
-    
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
     
+    @IBAction func showMoreMovie(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nvc = storyboard.instantiateViewController(withIdentifier: "MovieListNavigationViewController") as! UINavigationController
+        let vc = nvc.topViewController as! MovieListViewController
+        vc.isMovie = false
+        nvc.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
+    }
     
     func collectionViewSetup() {
         self.cltMovie.register(MovieCell.nib, forCellWithReuseIdentifier: MovieCell.identifier)
@@ -36,16 +46,6 @@ class OnTVCell: UITableViewCell {
         cltMovie.collectionViewLayout = flowLayout
         cltMovie.dataSource = self
         cltMovie.delegate = self
-    }
-    
-
-    @IBAction func showMoreMovie(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nvc = storyboard.instantiateViewController(withIdentifier: "MovieListNavigationViewController") as! UINavigationController
-        let vc = nvc.topViewController as! MovieListViewController
-        vc.isMovie = false
-        nvc.modalPresentationStyle = .fullScreen
-        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
     }
     
     func handleReloadData() {

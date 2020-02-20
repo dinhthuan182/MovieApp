@@ -9,7 +9,13 @@
 import UIKit
 
 class CastInMovieDetailCell: UICollectionViewCell {
-
+    // MARK: - @IBOutlet
+    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblSubTitle: UILabel!
+    @IBOutlet weak var lblEpisodes: UILabel!
+    
+    //MARK: - static properties
     static var identifier: String{
         return String(describing: CastInMovieDetailCell.self)
     }
@@ -17,11 +23,6 @@ class CastInMovieDetailCell: UICollectionViewCell {
     static var nib: UINib{
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    @IBOutlet weak var imgProfile: UIImageView!
-    @IBOutlet weak var lblName: UILabel!
-    @IBOutlet weak var lblSubTitle: UILabel!
-    @IBOutlet weak var lblEpisodes: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
