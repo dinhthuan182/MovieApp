@@ -16,7 +16,7 @@ class InTheaterCell: UITableViewCell {
     
     // MARK: - properties
     var movies = [Movie]()
-    
+    var delegate: MovieDetailDelegate?
     // MARK: - static properties
     static var identifier: String{
         return String(describing: InTheaterCell.self)
@@ -32,7 +32,7 @@ class InTheaterCell: UITableViewCell {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = movies[indexPath.row]
-        showMovieDetail(for: movie.id)
+        delegate?.showMovieDetail(for: movie.id, isMovie: true)
     }
     
     @IBAction func showMoreMovie(_ sender: Any) {
@@ -54,15 +54,6 @@ class InTheaterCell: UITableViewCell {
         cltInTheaterMovie.collectionViewLayout = flowLayout
         cltInTheaterMovie.delegate = self
         cltInTheaterMovie.dataSource = self
-    }
-    
-    func showMovieDetail(for id: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nvc = storyboard.instantiateViewController(withIdentifier: "MovieDetailNavigationViewController") as! UINavigationController
-        let vc = nvc.topViewController as! MovieDetailViewController
-        vc.movieid = id
-        nvc.modalPresentationStyle = .fullScreen
-        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
     }
     
     func handleReloadData() {

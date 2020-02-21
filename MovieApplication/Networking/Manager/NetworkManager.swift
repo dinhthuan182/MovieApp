@@ -9,10 +9,15 @@
 import Foundation
 
 struct NetworkManager {
-    static let environment : NetworkEnvironment = .production
-    static let MovieAPIKey = "d946957b5c4e68cd9115ebea6a06c502"
+    
     private let movieRouter = Router<MovieApi>()
     private let tvRouter = Router<TelevisionApi>()
+    private let listRouter = Router<ListApi>()
+    private let trendingRouter = Router<TrendingApi>()
+    private let searchRouter = Router<SearchApi>()
+    
+    static let environment : NetworkEnvironment = .production
+    static let MovieAPIKey = "d946957b5c4e68cd9115ebea6a06c502"
     
     enum NetworkResponse: String {
         case success
@@ -179,30 +184,30 @@ struct NetworkManager {
         }
     }
     
-    func getFeatureds(page: Int, completion: @escaping (_ movieApiResponse: MovieApiResponse?, _ error: String?) -> ()) {
-        movieRouter.request(.featured(page: page)) { (data, response, error) in
+    func getFeatureds(id: Int, completion: @escaping (_ listApiResponse: ListApiResponse?, _ error: String?) -> ()) {
+        listRouter.request(.detail(id: id)) { (data, response, error) in
             if error != nil {
                 completion(nil, "Please check your network connection.")
             }
             
             if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
-                switch result {
-                case .success:
-                    guard let responseData = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let apiResponse = try JSONDecoder().decode(MovieApiResponse.self, from: responseData)
-                        completion(apiResponse, nil)
-                    }catch {
-                        completion(nil, NetworkResponse.unableToDecode.rawValue)
-                    }
-                case .failure(let networkFailureError):
-                    completion(nil, networkFailureError)
-                }
+               let result = self.handleNetworkResponse(response)
+               switch result {
+               case .success:
+                   guard let responseData = data else {
+                       completion(nil, NetworkResponse.noData.rawValue)
+                       return
+                   }
+                   
+                   do {
+                       let apiResponse = try JSONDecoder().decode(ListApiResponse.self, from: responseData)
+                       completion(apiResponse, nil)
+                   }catch {
+                       completion(nil, NetworkResponse.unableToDecode.rawValue)
+                   }
+               case .failure(let networkFailureError):
+                   completion(nil, networkFailureError)
+               }
             }
         }
     }
@@ -280,6 +285,34 @@ struct NetworkManager {
                    
                    do {
                        let apiResponse = try JSONDecoder().decode(VideoApiResponse.self, from: responseData)
+                    completion(apiResponse, nil)
+                   }catch {
+                       completion(nil, NetworkResponse.unableToDecode.rawValue)
+                   }
+               case .failure(let networkFailureError):
+                   completion(nil, networkFailureError)
+               }
+            }
+        }
+    }
+    
+    func loadKeywordSearch(for key: String, completion: @escaping (_ searchApiResponse: SearchApiResponse?, _ error: String?) -> ()) {
+        searchRouter.request(.keyword(query: key)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+               let result = self.handleNetworkResponse(response)
+               switch result {
+               case .success:
+                   guard let responseData = data else {
+                       completion(nil, NetworkResponse.noData.rawValue)
+                       return
+                   }
+                   
+                   do {
+                       let apiResponse = try JSONDecoder().decode(SearchApiResponse.self, from: responseData)
                     completion(apiResponse, nil)
                    }catch {
                        completion(nil, NetworkResponse.unableToDecode.rawValue)

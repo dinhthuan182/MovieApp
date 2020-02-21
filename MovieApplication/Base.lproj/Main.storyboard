@@ -162,12 +162,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="scaleToFill" searchBarStyle="minimal" text="" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="LET-uC-3Do">
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="uGv-VR-Gkt" id="v1d-Xd-6mf"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SIF-Ri-VIh">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="132" width="414" height="681"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="uGv-VR-Gkt" id="54p-Gm-kfS"/>
                                     <outlet property="delegate" destination="uGv-VR-Gkt" id="ZG4-9w-UfV"/>
+                                </connections>
+                            </tableView>
+                            <tableView hidden="YES" clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="10" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="g7p-Ce-Bcn">
+                                <rect key="frame" x="0.0" y="132" width="414" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="uGv-VR-Gkt" id="mcg-2D-ohL"/>
+                                    <outlet property="delegate" destination="uGv-VR-Gkt" id="qEa-b8-Lq0"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -175,14 +196,20 @@
                         <constraints>
                             <constraint firstItem="SIF-Ri-VIh" firstAttribute="leading" secondItem="RVl-Th-LdT" secondAttribute="leading" id="1n1-ZH-X7F"/>
                             <constraint firstItem="RVl-Th-LdT" firstAttribute="trailing" secondItem="SIF-Ri-VIh" secondAttribute="trailing" id="7Wx-Sd-CpN"/>
-                            <constraint firstItem="SIF-Ri-VIh" firstAttribute="top" secondItem="RVl-Th-LdT" secondAttribute="top" id="UOD-RH-v8d"/>
+                            <constraint firstItem="g7p-Ce-Bcn" firstAttribute="top" secondItem="LET-uC-3Do" secondAttribute="bottom" id="ADI-a1-fmN"/>
+                            <constraint firstItem="LET-uC-3Do" firstAttribute="leading" secondItem="RVl-Th-LdT" secondAttribute="leading" id="LOf-xv-uD2"/>
+                            <constraint firstItem="LET-uC-3Do" firstAttribute="trailing" secondItem="RVl-Th-LdT" secondAttribute="trailing" id="PVf-Rq-SJ6"/>
+                            <constraint firstItem="SIF-Ri-VIh" firstAttribute="top" secondItem="LET-uC-3Do" secondAttribute="bottom" id="TqG-rR-yah"/>
                             <constraint firstItem="RVl-Th-LdT" firstAttribute="bottom" secondItem="SIF-Ri-VIh" secondAttribute="bottom" id="bll-3t-XxH"/>
+                            <constraint firstItem="LET-uC-3Do" firstAttribute="top" secondItem="RVl-Th-LdT" secondAttribute="top" id="rL5-2t-y7n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RVl-Th-LdT"/>
                     </view>
                     <navigationItem key="navigationItem" id="GIi-FX-aSw"/>
                     <connections>
+                        <outlet property="searchbar" destination="LET-uC-3Do" id="TVO-51-PSH"/>
                         <outlet property="tblMovies" destination="SIF-Ri-VIh" id="e4D-xh-PK1"/>
+                        <outlet property="tblTrendingSearchs" destination="g7p-Ce-Bcn" id="yx2-Gp-Krj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGi-Iu-fjx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

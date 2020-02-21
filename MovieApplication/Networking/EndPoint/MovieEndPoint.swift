@@ -22,6 +22,7 @@ public enum MovieApi {
     case infomation(id: Int)
     case video(id: Int)
     case credits(id: Int)
+    case lists(id: Int)
 }
 
 extension MovieApi: EndPointType {
@@ -57,6 +58,8 @@ extension MovieApi: EndPointType {
             return "movie/\(id)/videos"
         case .credits(let id):
             return "movie/\(id)/credits"
+        case .lists(let id):
+            return "movie/\(id)/lists"
         }
     }
     
@@ -77,7 +80,7 @@ extension MovieApi: EndPointType {
         case .infomation:
             return .requestParameters(bodyParameters: nil, urlParameters: ["api_key":NetworkManager.MovieAPIKey])
             
-        case .credits, .video:
+        case .credits, .video, .lists:
             return .requestParameters(bodyParameters: nil, urlParameters: ["api_key":NetworkManager.MovieAPIKey])
         default:
             return .request

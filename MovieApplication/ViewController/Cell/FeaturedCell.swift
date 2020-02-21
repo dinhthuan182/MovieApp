@@ -15,7 +15,7 @@ class FeaturedCell: UITableViewCell {
     @IBOutlet weak var cltFeatureMovie: UICollectionView!
     
     // MARK: - properties
-    var movies = [Movie]()
+    var lists = [ListApiResponse]()
     
     // MARK: - static properties
     static var identifier: String{
@@ -36,6 +36,8 @@ class FeaturedCell: UITableViewCell {
         flowLayout.minimumLineSpacing = 10
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.scrollDirection = .vertical
+        
+        cltFeatureMovie.reloadData()
         cltFeatureMovie.collectionViewLayout = flowLayout
         cltFeatureMovie.delegate = self
         cltFeatureMovie.dataSource = self
@@ -52,17 +54,16 @@ class FeaturedCell: UITableViewCell {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension FeaturedCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return lists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeatureMovieCell.identifier, for: indexPath) as! FeatureMovieCell
-        let movie = movies[indexPath.row]
-        if let backdrop = movie.backdrop {
-            cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
-        }
-        cell.lblTitle.text = movie.title
-        cell.tvDesc.text = movie.overview
+        let list = lists[indexPath.row]
+        cell.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: list.posterPath)
+
+        cell.lblTitle.text = list.name
+        cell.tvDesc.text = list.description
         return cell
     }
 }

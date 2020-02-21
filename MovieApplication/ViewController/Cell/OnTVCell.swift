@@ -14,7 +14,7 @@ class OnTVCell: UITableViewCell {
     
     // MARK: - properties
     var televisions = [Television]()
-    
+    var delegate: MovieDetailDelegate?
     // MARK: - static properties
     static var identifier: String {
         return String(describing: OnTVCell.self)
@@ -75,17 +75,7 @@ extension OnTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tv = televisions[indexPath.row]
-        showMovieDetail(for: tv.id)
-    }
-    
-    func showMovieDetail(for id: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nvc = storyboard.instantiateViewController(withIdentifier: "MovieDetailNavigationViewController") as! UINavigationController
-        let vc = nvc.topViewController as! MovieDetailViewController
-        vc.movieid = id
-        vc.isMovie = false
-        nvc.modalPresentationStyle = .fullScreen
-        self.window?.rootViewController?.present(nvc, animated: true, completion: nil)
+        delegate?.showMovieDetail(for: tv.id, isMovie: false)
     }
 }
 

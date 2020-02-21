@@ -74,8 +74,7 @@ class PersonDetailViewController: UIViewController {
     var person: Person? {
         didSet {
             if let profilePath = person?.profilePath {
-                let urlString = Api.general.getImageLink(profilePath)
-                self.imgProfile.loadImageUsingCacheWithUrlString(imgName: urlString)
+                self.imgProfile.loadImageUsingCacheWithUrlString(imgName: profilePath)
             }
             
             self.lblName.text = person?.name

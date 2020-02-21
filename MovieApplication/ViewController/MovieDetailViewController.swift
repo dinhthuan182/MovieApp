@@ -122,7 +122,7 @@ class MovieDetailViewController: UITableViewController {
         // Cast cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CastMovieDetailCell.identifier, for: indexPath) as! CastMovieDetailCell
-            
+            cell.delegate = self
             if isMovie {
                 networkManager.getMovieCredits(id: movieid) { (data, error) in
                     if let error = error {
@@ -260,7 +260,6 @@ extension MovieDetailViewController: HeaderCellDelagate {
         }
     }
 }
-
 
 // MARK: - CastDelegate
 extension MovieDetailViewController: CastDelegate {

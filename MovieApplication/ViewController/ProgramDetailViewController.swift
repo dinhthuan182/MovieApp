@@ -105,30 +105,15 @@ class ProgramDetailViewController: UIViewController {
             var ratedString = ""
             // Setup image Backdrop
             if let backdrop = program?.backdropPath {
-                let urlString = Api.general.getImageLink(backdrop)
-                self.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: urlString)
+                self.imgBackdrop.loadImageUsingCacheWithUrlString(imgName: backdrop)
             }
             
             // Setup image poster
             if let poster = program?.posterPath {
-                let urlString = Api.general.getImageLink(poster)
-                self.imgPoster.loadImageUsingCacheWithUrlString(imgName: urlString)
+                self.imgPoster.loadImageUsingCacheWithUrlString(imgName: poster)
             }
             
             self.lblTitle.text = program?.name
-            
-            // Setup genre list
-//            if let genres = program?.genres {
-//                for (index, genre) in genres.enumerated() {
-//                    if index == genres.endIndex - 1 {
-//                        genreString += genre.name
-//                        break
-//                    }
-//                    genreString += ( genre.name + ", " )
-//                }
-//            }
-            
-            //self.lblGenres.text = genreString
             
             // Setup reated
             if let rated = program?.voteAverage {

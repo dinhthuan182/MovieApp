@@ -47,6 +47,8 @@ class CastMovieDetailCell: UITableViewCell {
         flowLayout.minimumLineSpacing = 5
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.scrollDirection = .horizontal
+        
+        cltCasts.reloadData()
         cltCasts.collectionViewLayout = flowLayout
         cltCasts.dataSource = self
         cltCasts.delegate = self

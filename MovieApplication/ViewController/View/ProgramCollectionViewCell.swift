@@ -58,8 +58,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     private func setupBackDrop() {
         if let backdrop = program?.posterPath {
-            let urlString = Api.general.getImageLink(backdrop)
-            self.imgProgram.loadImageUsingCacheWithUrlString(imgName: urlString)
+            self.imgProgram.loadImageUsingCacheWithUrlString(imgName: backdrop)
         }
         
     }

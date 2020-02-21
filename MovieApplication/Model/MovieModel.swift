@@ -41,7 +41,7 @@ struct Movie {
     let backdrop: String?
     let title: String
     let releaseDate: String
-    let rating: Double
+    let rating: Double?
     let overview: String
     
 }
@@ -66,7 +66,7 @@ extension Movie: Decodable {
         backdrop = try movieContainer.decodeIfPresent(String.self, forKey: .backdrop)
         title = try movieContainer.decode(String.self, forKey: .title)
         releaseDate = try movieContainer.decode(String.self, forKey: .releaseDate)
-        rating = try movieContainer.decode(Double.self, forKey: .rating)
+        rating = try movieContainer.decodeIfPresent(Double.self, forKey: .rating)
         overview = try movieContainer.decode(String.self, forKey: .overview)
     }
     

@@ -132,7 +132,7 @@ class MovieListViewController: UITableViewController {
                 }
             }
             
-        }else {
+        } else {
             // Get movie
             networkManager.getAiringTodayTV(page: page) { (responseData, error) in
                 if let error = error {
