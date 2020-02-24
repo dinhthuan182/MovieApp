@@ -48,10 +48,10 @@ class CastMovieDetailCell: UITableViewCell {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.scrollDirection = .horizontal
         
-        cltCasts.reloadData()
         cltCasts.collectionViewLayout = flowLayout
         cltCasts.dataSource = self
         cltCasts.delegate = self
+        handleReloadData()
     }
     
     func handleReloadData() {

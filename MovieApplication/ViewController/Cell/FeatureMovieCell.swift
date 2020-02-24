@@ -15,6 +15,8 @@ class FeatureMovieCell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tvDesc: UITextView!
     
+    
+    
     // MARK: - static properties
     static var identifier: String{
         return String(describing: FeatureMovieCell.self)
