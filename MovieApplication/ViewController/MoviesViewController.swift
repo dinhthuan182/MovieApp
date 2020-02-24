@@ -28,7 +28,6 @@ class MoviesViewController: UIViewController {
         super.viewDidAppear(animated)
         
         setupNavigation()
-        
     }
     
     override func viewDidLoad() {
@@ -154,10 +153,11 @@ extension MoviesViewController: UISearchBarDelegate {
         let bounds = self.tblTrendingSearchs.bounds
         self.tblTrendingSearchs.frame = CGRect(x: bounds.minX, y: bounds.minY + 120, width: bounds.width, height: bounds.height)
         
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0.5, options: .curveEaseInOut, animations: {
             self.tblTrendingSearchs.frame = CGRect(x: bounds.minX, y: bounds.minY + 120, width: bounds.width, height: CGFloat(0))
-        }, completion: nil)
-        tblTrendingSearchs.isHidden = true
+        }) { (res) in
+            self.tblTrendingSearchs.isHidden = true
+        }
     }
     
     func reloadSearchData() {
