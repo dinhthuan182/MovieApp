@@ -75,8 +75,7 @@ extension CastMovieDetailCell: UICollectionViewDelegate, UICollectionViewDataSou
             cell.imgProfile.loadImageUsingCacheWithUrlString(imgName:profile)
         }
         
-        cell.lblName.text = c.name
-        cell.lblSubTitle.text = c.character
+        cell.cast = c
         return cell
     }
     

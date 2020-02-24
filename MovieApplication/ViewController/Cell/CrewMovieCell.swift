@@ -38,6 +38,7 @@ class CrewMovieCell: UITableViewCell {
         flowLayout.minimumLineSpacing = 5
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.scrollDirection = .vertical
+        
         cltCrew.collectionViewLayout = flowLayout
         cltCrew.dataSource = self
         cltCrew.delegate = self
@@ -59,8 +60,7 @@ extension CrewMovieCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CrewMovieDetailCell.identifier, for: indexPath) as! CrewMovieDetailCell
         let crew = filterCrew[indexPath.row]
-        cell.lblTitle.text = crew.name
-        cell.lblSubTitle.text = crew.job
+        cell.crew = crew
         return cell
     }
 }

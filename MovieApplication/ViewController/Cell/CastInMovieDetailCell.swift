@@ -15,6 +15,14 @@ class CastInMovieDetailCell: UICollectionViewCell {
     @IBOutlet weak var lblSubTitle: UILabel!
     @IBOutlet weak var lblEpisodes: UILabel!
     
+    // MARK: - properties
+    var cast: Cast? {
+        didSet {
+            self.lblName.text = cast?.name
+            self.lblSubTitle.text = cast?.character
+        }
+    }
+    
     //MARK: - static properties
     static var identifier: String{
         return String(describing: CastInMovieDetailCell.self)

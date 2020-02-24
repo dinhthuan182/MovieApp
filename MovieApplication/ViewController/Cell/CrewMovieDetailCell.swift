@@ -14,6 +14,14 @@ class CrewMovieDetailCell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblSubTitle: UILabel!
     
+    // MARK: - properties
+    var crew: Crew? {
+        didSet {
+            self.lblTitle.text = crew?.name
+            self.lblSubTitle.text = crew?.job
+        }
+    }
+    
     // MARK: - static properties
     static var identifier: String {
         return String(describing: CrewMovieDetailCell.self)

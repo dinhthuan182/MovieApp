@@ -268,6 +268,5 @@ extension MovieDetailViewController: CastDelegate {
         controller.person = person
         self.present(controller, animated: true)
     }
-    
 }
 

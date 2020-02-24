@@ -15,6 +15,7 @@ class OnTVCell: UITableViewCell {
     // MARK: - properties
     var televisions = [Television]()
     var delegate: MovieDetailDelegate?
+    
     // MARK: - static properties
     static var identifier: String {
         return String(describing: OnTVCell.self)
